@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import { Icon, Logo } from "./Icons";
 import type { IconName } from "./Icons";
@@ -6,9 +6,8 @@ import { faqs, github, platforms } from "./data";
 import { useReleases } from "./useReleases";
 import "./App.css";
 import "./motion.css";
-import "./HeroScene.css";
+import HeroLayers from "./HeroLayers";
 
-const HeroScene = lazy(() => import("./HeroScene"));
 const copyrightYear = new Date().getFullYear();
 
 const asset = (file: string) => `${import.meta.env.BASE_URL}assets/${file}`;
@@ -107,20 +106,7 @@ function Hero() {
         </div>
       </div>
       <div className="hero-visual">
-        <Suspense
-          fallback={
-            <div className="scene-static">
-              <img
-                src={asset("zarp-logo.jpg")}
-                alt=""
-                width="200"
-                height="200"
-              />
-            </div>
-          }
-        >
-          <HeroScene />
-        </Suspense>
+        <HeroLayers />
       </div>
       <div className="hero-baseline">
         <span>МЕНЬШЕ НАСТРОЕК · БОЛЬШЕ ИНТЕРНЕТА</span>

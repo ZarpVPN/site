@@ -1,0 +1,334 @@
+.hero-layers {
+  --pointer-x: 0;
+  --pointer-y: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sphere-layer {
+  transform: translate3d(
+    calc(var(--pointer-x) * -0.35rem),
+    calc(var(--pointer-y) * -0.35rem),
+    0
+  );
+}
+.sphere-outline,
+.dotted-sphere,
+.sphere-halo {
+  position: absolute;
+  width: 118%;
+  aspect-ratio: 1;
+}
+.sphere-outline {
+  border: 1px solid #ff822710;
+  border-radius: 50%;
+}
+.sphere-halo {
+  background: radial-gradient(ellipse, #ff822713, transparent 67%);
+}
+.orbit-layer {
+  transform: translate3d(
+    calc(var(--pointer-x) * -0.65rem),
+    calc(var(--pointer-y) * -0.65rem),
+    0
+  );
+}
+.scene-orbit {
+  width: 125%;
+  height: 30%;
+  border: 1px solid #ff82272b;
+  border-radius: 50%;
+  transform: rotate(-28deg);
+}
+.card-layer {
+  transform: translate3d(
+    calc(var(--pointer-x) * 0.55rem),
+    calc(var(--pointer-y) * 0.55rem),
+    0
+  );
+}
+.visual-card {
+  position: relative;
+  width: 15.875rem;
+  padding: 1.375rem 1.5rem 0;
+  background: linear-gradient(135deg, #25262c, #141518 70%);
+  border: 1px solid #414044;
+  border-radius: 1rem;
+  box-shadow:
+    0 1.75rem 4.375rem #0008,
+    inset 0 1px 0 #ffffff06;
+  transform: rotate(-5deg);
+}
+.visual-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.visual-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4375rem;
+  font-weight: 750;
+  letter-spacing: -1px;
+}
+.visual-brand img {
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 0.35rem;
+}
+.visual-tag {
+  font: 0.4rem monospace;
+  color: #a6a7ae;
+  border: 1px solid #49494c;
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.25rem;
+  letter-spacing: 0.035rem;
+  white-space: nowrap;
+}
+.visual-subtitle {
+  font-size: 0.5625rem;
+  color: #999da8;
+  margin-top: 0.3125rem;
+}
+.power-emblem {
+  position: relative;
+  width: 9.25rem;
+  height: 9.25rem;
+  margin: 1.75rem auto 1.375rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ff822730;
+  border-radius: 50%;
+}
+.power-emblem-ring {
+  position: absolute;
+  inset: 0.4375rem;
+  border: 0.3125rem solid #ff8227;
+  border-right-color: #ff822759;
+  border-bottom-color: #ff822775;
+  border-radius: 50%;
+  box-shadow: 0 0 1.375rem #ff82271c;
+}
+.power-emblem-center {
+  width: 7.125rem;
+  height: 7.125rem;
+  border: 1px solid #ff82272e;
+  border-radius: 50%;
+  background: radial-gradient(circle, #342922, #232120);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+}
+.power-emblem .icon {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+.visual-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4375rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-height: 1.3125rem;
+  white-space: nowrap;
+}
+.visual-title > span,
+.orbit-label-top > span {
+  width: 0.3125rem;
+  height: 0.3125rem;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.visual-caption {
+  font-size: 0.5625rem;
+  color: #9da0a9;
+  text-align: center;
+  margin: 0.4375rem 0 1.5625rem;
+}
+.visual-card-bottom {
+  border-top: 1px solid #343337;
+  padding: 0.875rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #afada9;
+  font-size: 0.5625rem;
+}
+.visual-card-bottom > span {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.visual-card-bottom .icon {
+  width: 0.8125rem;
+  height: 0.8125rem;
+}
+.visual-card-bottom > .icon {
+  color: var(--accent);
+}
+.label-layer {
+  transform: translate3d(
+    calc(var(--pointer-x) * 0.85rem),
+    calc(var(--pointer-y) * 0.85rem),
+    0
+  );
+}
+.orbit-label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.4375rem;
+  background: #1e1b18;
+  border: 1px solid #5f3b2570;
+  border-radius: 0.3125rem;
+  padding: 0.5625rem 0.75rem;
+  font-size: 0.5625rem;
+  letter-spacing: 1px;
+  color: #dcaa85;
+  box-shadow: 0 0.5rem 1.25rem #0003;
+  white-space: nowrap;
+}
+.orbit-label-top {
+  top: 2.8125rem;
+  right: 5%;
+  transform: rotate(5deg);
+}
+.orbit-label-bottom {
+  bottom: 2.4375rem;
+  left: 0;
+  transform: rotate(-5deg);
+  color: #9c9189;
+  letter-spacing: 0.4px;
+}
+.orbit-label .icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+@media (max-width: 1050px) and (min-width: 701px) {
+  .sphere-outline,
+  .dotted-sphere,
+  .sphere-halo {
+    width: 100%;
+  }
+  .scene-orbit {
+    width: 105%;
+  }
+  .visual-card {
+    width: 14.4375rem;
+    padding-inline: 1.1875rem;
+  }
+  .orbit-label-top {
+    right: 0;
+    top: 1.5rem;
+  }
+  .orbit-label-bottom {
+    left: 0;
+    bottom: 0.75rem;
+  }
+}
+@media (max-width: 850px) and (min-width: 701px) {
+  .visual-card {
+    width: 13rem;
+    padding: 1rem 1rem 0;
+  }
+  .visual-title {
+    font-size: 0.65rem;
+  }
+  .power-emblem {
+    width: 8rem;
+    height: 8rem;
+    margin: 1.4rem auto 1rem;
+  }
+  .power-emblem-center {
+    width: 6rem;
+    height: 6rem;
+  }
+  .visual-brand {
+    font-size: 1.25rem;
+  }
+  .visual-tag {
+    font-size: 0.33rem;
+  }
+  .orbit-label {
+    font-size: 0.45rem;
+  }
+}
+@media (max-width: 700px) {
+  .hero-layers {
+    overflow: clip;
+  }
+  .sphere-outline,
+  .dotted-sphere,
+  .sphere-halo {
+    width: 100%;
+  }
+  .scene-orbit {
+    width: 102%;
+    height: 28%;
+  }
+  .visual-card {
+    width: 13.75rem;
+    padding: 1.1rem 1.15rem 0;
+  }
+  .visual-title {
+    font-size: 0.65rem;
+  }
+  .visual-brand {
+    font-size: 1.3rem;
+  }
+  .visual-brand img {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+  .visual-tag {
+    font-size: 0.35rem;
+  }
+  .power-emblem {
+    width: 8rem;
+    height: 8rem;
+    margin: 1.3rem auto 1rem;
+  }
+  .power-emblem-center {
+    width: 6rem;
+    height: 6rem;
+  }
+  .power-emblem .icon {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  .visual-caption {
+    margin-bottom: 1.1rem;
+  }
+  .visual-card-bottom {
+    padding: 0.7rem 0;
+  }
+  .orbit-label {
+    font-size: 0.45rem;
+    padding: 0.45rem 0.55rem;
+  }
+  .orbit-label-top {
+    top: 0.8rem;
+    right: 0;
+  }
+  .orbit-label-bottom {
+    bottom: 0.5rem;
+    left: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .parallax-layer {
+    transform: none;
+  }
+}

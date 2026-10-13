@@ -121,25 +121,23 @@ section[id] {
   font-size: 0.8125rem;
   font-weight: 750;
   transition:
-    background 0.35s var(--motion-ease),
-    color 0.35s var(--motion-ease),
-    border-color 0.35s var(--motion-ease);
+    transform 0.4s ease-in-out,
+    box-shadow 0.4s ease-in-out;
 }
 .button-primary {
   background: var(--accent);
   color: #15100c;
-}
-.button-primary:hover {
-  background: #ffa15b;
 }
 .button-secondary {
   background: #1d1e22;
   border-color: #34353a;
   color: #eee;
 }
-.button-secondary:hover {
-  background: #28292e;
-  border-color: #505158;
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.5rem 1rem #0003;
+  }
 }
 .text-link {
   display: inline-flex;

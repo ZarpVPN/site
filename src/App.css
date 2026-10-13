@@ -58,9 +58,6 @@
   padding: 0.5625rem 1rem;
   font-size: 0.75rem;
 }
-.header-download:hover {
-  background: #392719;
-}
 .header-download .icon {
   width: 1rem;
   height: 1rem;
