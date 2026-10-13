@@ -209,7 +209,7 @@ export default function HeroLayers() {
             </span>
           </div>
           <div className="visual-title">
-            <span /> Одно нажатие — и вперёд
+            <span /> Одно нажатие - и вперёд
           </div>
           <p className="visual-caption">Без ручной настройки</p>
           <div className="visual-card-bottom">

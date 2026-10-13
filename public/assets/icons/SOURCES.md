@@ -11,7 +11,6 @@ Interface icons are unmodified assets from [Tabler Icons](https://github.com/tab
 | shield.svg   | shield-check.svg               |
 | refresh.svg  | refresh.svg                    |
 | bolt.svg     | bolt.svg                       |
-| globe.svg    | world.svg                      |
 | check.svg    | check.svg                      |
 | power.svg    | power.svg                      |
 | menu.svg     | menu-2.svg                     |

@@ -31,7 +31,21 @@ export function useSmoothAnchors() {
       const start = window.scrollY;
       const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
       const margin = target ? parseFloat(getComputedStyle(target).scrollMarginTop) || 0 : 0;
-      const destination = target ? start + target.getBoundingClientRect().top - padding - margin : 0;
+      let destination = target ? start + target.getBoundingClientRect().top - padding - margin : 0;
+      if (target?.id === "download") {
+        const heading = target.querySelector(".download-heading");
+        const footnote = target.querySelector(".download-footnote");
+        if (heading && footnote) {
+          const top = heading.getBoundingClientRect().top;
+          const height = footnote.getBoundingClientRect().bottom - top;
+          const headerHeight = document.querySelector(".header")?.getBoundingClientRect().height ?? 0;
+          const availableHeight = window.innerHeight - headerHeight;
+          // Center the complete block when it fits; tall mobile layouts keep top alignment.
+          if (height <= availableHeight - 32) {
+            destination = start + top - headerHeight - (availableHeight - height) / 2;
+          }
+        }
+      }
       const end = Math.max(0, Math.min(destination, document.documentElement.scrollHeight - window.innerHeight));
       const distance = end - start;
       const duration = Math.min(1000, Math.max(450, Math.abs(distance) * 0.12));

@@ -51,7 +51,7 @@ function Header() {
   return (
     <header className="header" ref={header}>
       <div className="container header-inner">
-        <a href="#" aria-label="Zarp — на главную">
+        <a href="#" aria-label="Zarp - на главную">
           <Logo />
         </a>
         <nav
@@ -120,7 +120,7 @@ function Hero() {
             </a>
           ))}
           <span className="platform-divider" />
-          <span className="no-account">Без аккаунта Zarp</span>
+          <span className="no-account">Без регистрации</span>
         </div>
       </div>
       <div className="hero-visual">
@@ -377,7 +377,7 @@ function GettingStarted() {
             n: "01",
             icon: "download",
             title: "Скачайте приложение",
-            text: "Выберите свою платформу. Все файлы — из официальных релизов на GitHub.",
+            text: "Выберите свою платформу. Все файлы - из официальных релизов на GitHub.",
           },
           {
             n: "02",
@@ -616,7 +616,7 @@ function Footer() {
       <div className="container">
         <div className="footer-top">
           <div>
-            <a href="#" aria-label="Zarp — на главную">
+            <a href="#" aria-label="Zarp - на главную">
               <Logo />
             </a>
             <p>Меньше преград · Больше возможностей</p>
@@ -647,9 +647,9 @@ function Footer() {
         <div className="footer-bottom">
           <span>© {copyrightYear} Zarp · Open source</span>
           <p>
-            Zarp — независимый проект. Не связан с Cloudflare и не одобрен ею.
+            Zarp - независимый проект. Не связан с Cloudflare и не одобрен ею.
             <br />
-            Cloudflare и WARP — товарные знаки Cloudflare, Inc.
+            Cloudflare и WARP - товарные знаки Cloudflare, Inc.
           </p>
           <a href="#" className="back-top" aria-label="Наверх">
             <Icon name="arrow" />

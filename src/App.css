@@ -631,13 +631,16 @@
   border-top: 1px solid var(--line);
   padding-top: 0.875rem;
 }
+.downloads.section-space {
+  --section-space: 3rem;
+}
 .download-heading {
   text-align: center;
-  margin-bottom: 2.4375rem;
+  margin-bottom: 1.5rem;
 }
 .download-heading .eyebrow {
   justify-content: center;
-  margin-bottom: 1.125rem;
+  margin-bottom: 0.75rem;
 }
 .download-heading .section-heading {
   font-size: 3.25rem;
@@ -649,7 +652,7 @@
 .download-heading > p:last-child {
   font-size: 0.8125rem;
   color: var(--muted);
-  margin-top: 1.25rem;
+  margin-top: 0.875rem;
 }
 .download-grid {
   display: grid;
@@ -662,7 +665,7 @@
   background: linear-gradient(140deg, #1c1d21, #16171a);
   border: 1px solid #323338;
   border-radius: 0.875rem;
-  padding: 1.625rem;
+  padding: 1.375rem;
 }
 .download-card.recommended {
   border-color: #9e5c2c;
@@ -674,7 +677,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.4375rem;
+  margin-bottom: 1rem;
 }
 .os-icon {
   width: 2.75rem;
@@ -721,15 +724,15 @@
   line-height: 1.8;
   color: #bdc0c8;
   margin-top: 0.5625rem;
-  min-height: 2.0625rem;
+  min-height: unset;
 }
 .os-description {
   font-size: 0.6875rem;
   line-height: 1.9;
   color: var(--muted);
-  margin-top: 0.6875rem;
-  margin-bottom: 1.5625rem;
-  min-height: 5.3125rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.125rem;
+  min-height: 4rem;
 }
 .download-button {
   margin-top: auto;
@@ -754,7 +757,7 @@
   gap: 0.625rem;
   font-size: 0.5625rem;
   color: #a4a6af;
-  margin: 0.8125rem 0 1.3125rem;
+  margin: 0.75rem 0 0.875rem;
 }
 .download-meta a {
   display: flex;
@@ -775,7 +778,7 @@
   font-size: 0.625rem;
   color: #b0b2bb;
   border-top: 1px solid #2d2e34;
-  padding-top: 0.9375rem;
+  padding-top: 0.625rem;
 }
 .install-guide:hover {
   color: var(--accent);
@@ -789,7 +792,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 1.25rem;
-  padding: 1.375rem 0;
+  padding: 0.75rem 0;
   color: #93969e;
   font-size: 0.5625rem;
   line-height: 1.8;

@@ -9,7 +9,6 @@ export type IconName =
   | "shield"
   | "refresh"
   | "bolt"
-  | "globe"
   | "check"
   | "power"
   | "menu"

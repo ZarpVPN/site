@@ -70,6 +70,9 @@ img {
 section[id] {
   scroll-margin-top: 0;
 }
+section[tabindex="-1"]:focus {
+  outline: none;
+}
 .section-space[id] {
   scroll-margin-top: calc(-1 * var(--section-space));
 }
@@ -131,7 +134,7 @@ section[id] {
 }
 .button-primary {
   background: var(--accent);
-  --button-hover-border: #ffad70;
+  --button-hover-border: #b94d0b;
   color: #15100c;
 }
 .button-secondary {
