@@ -11,12 +11,11 @@
   inset: 0;
   display: grid;
   place-items: center;
-  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .sphere-layer {
   transform: translate3d(
-    calc(var(--pointer-x) * -0.35rem),
-    calc(var(--pointer-y) * -0.35rem),
+    calc(var(--pointer-x) * -1rem),
+    calc(var(--pointer-y) * -1rem),
     0
   );
 }
@@ -36,8 +35,8 @@
 }
 .orbit-layer {
   transform: translate3d(
-    calc(var(--pointer-x) * -0.65rem),
-    calc(var(--pointer-y) * -0.65rem),
+    calc(var(--pointer-x) * -0.5rem),
+    calc(var(--pointer-y) * -0.5rem),
     0
   );
 }
@@ -325,10 +324,5 @@
   .orbit-label-bottom {
     bottom: 0.5rem;
     left: 0;
-  }
-}
-@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
-  .parallax-layer {
-    transform: none;
   }
 }

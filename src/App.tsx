@@ -19,7 +19,24 @@ const nav = [
 ];
 function Header() {
   const [open, setOpen] = useState(false);
+  const header = useRef<HTMLElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    const element = header.current;
+    if (!element) return;
+    const measure = () =>
+      document.documentElement.style.setProperty(
+        "--header-height",
+        `${element.getBoundingClientRect().height}px`,
+      );
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    measure();
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--header-height");
+    };
+  }, []);
   useEffect(() => {
     const close = (e: globalThis.KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -31,7 +48,7 @@ function Header() {
     return () => document.removeEventListener("keydown", close);
   }, [open]);
   return (
-    <header className="header">
+    <header className="header" ref={header}>
       <div className="container header-inner">
         <a href="#" aria-label="Zarp — на главную">
           <Logo />

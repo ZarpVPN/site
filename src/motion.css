@@ -22,17 +22,11 @@
   overflow: hidden;
 }
 
-.feature-card,
 .download-card {
-  transition:
-    border-color 0.4s var(--motion-ease),
-    box-shadow 0.5s var(--motion-ease);
+  transition: none;
 }
-.download-card {
-  transition:
-    transform 0.5s var(--motion-ease),
-    border-color 0.4s var(--motion-ease),
-    box-shadow 0.5s var(--motion-ease);
+.feature-card {
+  transition: transform 0.4s ease-in-out;
 }
 .menu-toggle,
 .footer-links a,
@@ -47,13 +41,13 @@
 }
 
 @media (hover: hover) {
-  .feature-card:hover {
-    border-color: #555057;
-  }
   .download-card:hover {
-    transform: translateY(-0.2rem);
-    border-color: #76503a;
-    box-shadow: 0 0.7rem 2rem #0002;
+    transform: translateY(-0.4rem);
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .feature-card:hover {
+    transform: translateY(-0.25rem);
   }
 }
 

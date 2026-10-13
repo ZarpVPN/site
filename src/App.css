@@ -51,8 +51,9 @@
   height: 0.875rem;
 }
 .header-download {
+  --button-hover-border: #80502b;
   background: #24201d;
-  border: 1px solid #80502b;
+  border: 1px solid transparent;
   color: #ff9a4e;
   min-height: 2.625rem;
   padding: 0.5625rem 1rem;
@@ -193,7 +194,8 @@
   transform: rotate(90deg);
 }
 .section-space {
-  padding-top: 6.75rem;
+  --section-space: 6.75rem;
+  padding-top: var(--section-space);
 }
 .section-intro {
   display: flex;
@@ -313,8 +315,7 @@
   width: 4.5rem;
   height: 4.5rem;
   color: #ff8227;
-  stroke-width: 1;
-  background: radial-gradient(circle, #ff822718, transparent 60%);
+  background-color: currentColor;
   z-index: 1;
 }
 .shield-ring {
@@ -1048,7 +1049,7 @@
     grid-template-columns: 1.25fr 1fr;
   }
   .section-space {
-    padding-top: 5.3125rem;
+    --section-space: 5.3125rem;
   }
   .section-description {
     font-size: 0.6875rem;
@@ -1237,7 +1238,7 @@
     padding-bottom: 1.0625rem;
   }
   .section-space {
-    padding-top: 4.25rem;
+    --section-space: 4.25rem;
   }
   .section-intro {
     flex-direction: column;
