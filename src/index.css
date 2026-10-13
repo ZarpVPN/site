@@ -31,6 +31,19 @@ body {
   min-width: 0;
   background: var(--page-background);
 }
+html.telegram-ios,
+.telegram-ios body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+.telegram-ios #root {
+  height: 100%;
+  overflow: hidden auto;
+  overscroll-behavior: none;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height, 78px) + 24px);
+}
 button,
 a {
   -webkit-tap-highlight-color: transparent;

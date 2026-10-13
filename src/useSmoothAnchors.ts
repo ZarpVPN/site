@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { getPageScroller } from "./pageScroll";
 
 export function useSmoothAnchors() {
   useEffect(() => {
@@ -28,25 +29,32 @@ export function useSmoothAnchors() {
       }
       event.preventDefault();
       cancel();
-      const start = window.scrollY;
-      const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      const scroller = getPageScroller();
+      const documentScroll = scroller === document.scrollingElement;
+      const viewportTop = documentScroll ? 0 : scroller.getBoundingClientRect().top;
+      const viewportHeight = documentScroll ? window.innerHeight : scroller.clientHeight;
+      const start = scroller.scrollTop;
+      const padding = parseFloat(getComputedStyle(scroller).scrollPaddingTop) || 0;
       const margin = target ? parseFloat(getComputedStyle(target).scrollMarginTop) || 0 : 0;
-      let destination = target ? start + target.getBoundingClientRect().top - padding - margin : 0;
+      let destination = target
+        ? start + target.getBoundingClientRect().top - viewportTop - padding - margin
+        : 0;
       if (target?.id === "download") {
         const heading = target.querySelector(".download-heading");
         const footnote = target.querySelector(".download-footnote");
         if (heading && footnote) {
-          const top = heading.getBoundingClientRect().top;
-          const height = footnote.getBoundingClientRect().bottom - top;
+          const headingTop = heading.getBoundingClientRect().top;
+          const top = headingTop - viewportTop;
+          const height = footnote.getBoundingClientRect().bottom - headingTop;
           const headerHeight = document.querySelector(".header")?.getBoundingClientRect().height ?? 0;
-          const availableHeight = window.innerHeight - headerHeight;
+          const availableHeight = viewportHeight - headerHeight;
           // Center the complete block when it fits; tall mobile layouts keep top alignment.
           if (height <= availableHeight - 32) {
             destination = start + top - headerHeight - (availableHeight - height) / 2;
           }
         }
       }
-      const end = Math.max(0, Math.min(destination, document.documentElement.scrollHeight - window.innerHeight));
+      const end = Math.max(0, Math.min(destination, scroller.scrollHeight - viewportHeight));
       const distance = end - start;
       const duration = Math.min(1000, Math.max(450, Math.abs(distance) * 0.12));
       let startTime: number | null = null;
@@ -57,7 +65,9 @@ export function useSmoothAnchors() {
         const eased = progress < 0.5
           ? 4 * progress ** 3
           : 1 - (-2 * progress + 2) ** 3 / 2;
-        window.scrollTo({ top: start + distance * eased, behavior: "instant" });
+        const position = { top: start + distance * eased, behavior: "instant" as const };
+        if (documentScroll) window.scrollTo(position);
+        else scroller.scrollTo(position);
         if (progress < 1) {
           frame = requestAnimationFrame(animate);
         } else {
