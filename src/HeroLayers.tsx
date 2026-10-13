@@ -108,6 +108,15 @@ const DottedSphere = memo(function DottedSphere({
   return <canvas className="dotted-sphere" ref={canvas} />;
 });
 
+const PowerRing = memo(function PowerRing() {
+  return (
+    <svg className="power-emblem-ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <circle className="power-emblem-track" cx="50" cy="50" r="45" />
+      <circle className="power-emblem-progress" cx="50" cy="50" r="45" strokeDasharray="86 283" />
+    </svg>
+  );
+});
+
 export default function HeroLayers() {
   const { t } = useI18n();
   const container = useRef<HTMLDivElement>(null);
@@ -204,7 +213,7 @@ export default function HeroLayers() {
           </div>
           <p className="visual-subtitle">Cloudflare WARP + zapret2</p>
           <div className="power-emblem">
-            <span className="power-emblem-ring" />
+            <PowerRing />
             <span className="power-emblem-center">
               <Icon name="power" />
             </span>

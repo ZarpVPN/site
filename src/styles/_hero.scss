@@ -366,26 +366,49 @@
   margin: 1.75rem auto 1.375rem;
   display: grid;
   place-items: center;
-  border: 1px solid #ff822730;
   border-radius: 50%;
 }
 
 .power-emblem-ring {
   position: absolute;
-  inset: 0.4375rem;
-  border: 0.3125rem solid #ff8227;
-  border-right-color: #ff822759;
-  border-bottom-color: #ff822775;
-  border-radius: 50%;
-  box-shadow: 0 0 1.375rem #ff82271c;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: power-ring-spin 5s linear infinite;
+  will-change: transform;
+}
+
+.power-emblem-ring circle {
+  fill: none;
+  stroke-width: 6;
+}
+
+.power-emblem-track {
+  stroke: #50311f;
+}
+
+.power-emblem-progress {
+  stroke: var(--accent);
+  stroke-linecap: round;
+  transform: rotate(180deg);
+  transform-origin: 50% 50%;
+}
+
+@keyframes power-ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .power-emblem-center {
-  width: 7.125rem;
-  height: 7.125rem;
-  border: 1px solid #ff82272e;
+  position: relative;
+  width: 6.875rem;
+  height: 6.875rem;
   border-radius: 50%;
-  background: radial-gradient(circle, #342922, #232120);
+  background: #1b1e24;
   color: var(--accent);
   display: grid;
   place-items: center;
