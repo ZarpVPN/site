@@ -68,10 +68,19 @@ export function useReleases() {
         const values = results.flatMap((result) =>
           result.status === "fulfilled" ? [result.value] : [],
         );
-        setReleases((current) => ({
-          ...current,
-          ...Object.fromEntries(values.map((v) => [v.id, v.release])),
-        }));
+        setReleases((current) => {
+          let next = current;
+          for (const { id, release } of values) {
+            const previous = current[id];
+            if (
+              previous.version === release.version && previous.size === release.size &&
+              previous.url === release.url && previous.releaseUrl === release.releaseUrl
+            ) continue;
+            if (next === current) next = { ...current };
+            next[id] = release;
+          }
+          return next;
+        });
         setLive(values.length === platforms.length);
       })
       .finally(() => clearTimeout(timeout));

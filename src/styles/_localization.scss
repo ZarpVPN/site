@@ -1,0 +1,204 @@
+@use "breakpoints" as bp;
+
+.language-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.6875rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  .language-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  [role="alert"] {
+    font-size: 0.625rem;
+    color: #ff9a4e;
+  }
+}
+
+.language-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.405rem;
+  inline-size: 4.6575rem;
+  block-size: 1.670625rem;
+  padding: 0.354375rem 0.405rem;
+  font-size: 0.556875rem;
+  line-height: 1.3;
+  color: #eee;
+  background: var(--surface);
+  border: 1px solid transparent;
+  border-radius: 0.3375rem;
+  transition: border-color var(--transition-duration) var(--motion-ease);
+  &:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 0;
+  }
+}
+
+.language-chevron {
+  flex-shrink: 0;
+  inline-size: 0.28125rem;
+  block-size: 0.28125rem;
+  margin-inline: 0.1125rem;
+  border-right: 1.35px solid #b1b3bb;
+  border-bottom: 1.35px solid #b1b3bb;
+  transform: translateY(-0.05625rem) rotate(45deg);
+  transition: transform var(--transition-duration) var(--motion-ease);
+  [aria-expanded="true"] & {
+    transform: translateY(0.05625rem) rotate(225deg);
+  }
+}
+
+.language-menu {
+  position: absolute;
+  inset-block-start: calc(100% + 0.320625rem);
+  inset-inline-end: 0;
+  z-index: 1;
+  min-inline-size: 7.695rem;
+  max-block-size: min(18.81rem, calc(100dvh - var(--header-height, 78px) - 1.2825rem));
+  font-size: 0.5878125rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.2671875rem;
+  background: #1b1c20;
+  border: 1px solid var(--line);
+  border-radius: 0.4809375rem;
+  box-shadow: 0 0.64125rem 1.71rem #0005;
+  transition: opacity var(--transition-duration), transform var(--transition-duration);
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-0.21375rem);
+  }
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.64125rem;
+  min-block-size: 1.816875rem;
+  padding: 0.3740625rem 0.534375rem;
+  border-radius: 0.2671875rem;
+  color: #c3c5ce;
+  cursor: pointer;
+  transition: background-color var(--transition-duration), color var(--transition-duration);
+  &[aria-selected="true"] {
+    color: #ff9a4e;
+  }
+  &.is-active {
+    background: #ffffff08;
+    color: #eee;
+  }
+  .icon {
+    color: var(--accent);
+  }
+}
+
+.navigation .language-option .icon {
+  width: 0.748125rem;
+  height: 0.748125rem;
+}
+
+@include bp.pointer-hover {
+  .language-trigger:hover {
+    border-color: #80502b;
+  }
+  .language-option:hover {
+    color: #ff9a4e;
+    background: #ff822710;
+  }
+}
+
+.logo,
+.hero-layers,
+.release-version {
+  direction: ltr;
+}
+
+.hero-actions,
+.hero-platforms {
+  flex-wrap: wrap;
+}
+
+.visual-title {
+  white-space: normal;
+  text-align: center;
+}
+
+html:lang(zh) {
+  font-family: "Manrope Variable", "PingFang SC", "Microsoft YaHei", sans-serif;
+  .hero h1,
+  .section-heading {
+    letter-spacing: normal;
+  }
+}
+
+html:lang(fa) {
+  font-family: Tahoma, "Geeza Pro", Arial, sans-serif;
+  .section-heading,
+  .hero h1,
+  .eyebrow,
+  .hero-badge,
+  .visual-title,
+  .advanced-copy h2,
+  .feature-card h3,
+  .visual-tag,
+  .orbit-label,
+  .footer-links > div > span {
+    letter-spacing: normal;
+  }
+  .visual-title,
+  .visual-caption,
+  .visual-card-bottom > span,
+  .orbit-label-bottom {
+    direction: rtl;
+  }
+  .button .directional-arrow {
+    transform: scaleX(-1);
+  }
+}
+
+@include bp.compact {
+  .header .logo {
+    font-size: 1.6875rem;
+    gap: 0.5rem;
+    img {
+      width: 1.875rem;
+      height: 1.875rem;
+    }
+  }
+  .language-switcher {
+    padding-block: 0.75rem;
+    flex-wrap: wrap;
+    .language-label {
+      position: static;
+      width: auto;
+      height: auto;
+      clip-path: none;
+    }
+    .language-trigger {
+      margin-inline-start: auto;
+    }
+    [role="alert"] {
+      flex-basis: 100%;
+    }
+  }
+  .language-menu {
+    position: static;
+    flex-basis: 100%;
+    min-inline-size: 0;
+    max-block-size: 17.1rem;
+  }
+  .navigation {
+    max-block-size: calc(100dvh - var(--header-height, 78px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}

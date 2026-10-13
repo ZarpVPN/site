@@ -1,0 +1,41 @@
+/// <reference lib="dom" />
+
+export const supportedLocales = ["en", "ru", "es", "pt", "zh", "fr", "de", "fa"] as const;
+export type Locale = (typeof supportedLocales)[number];
+export const languageStorageKey = "zarp-language";
+
+// Also runs inline in the HTML head, before React or translation detection.
+// Keep this function self-contained so its compiled source can be injected.
+export function initializePageLanguage(locales: readonly Locale[], storageKey: string): Locale {
+  const preferred = navigator.languages?.length ? navigator.languages : [navigator.language];
+  const match = (value: string) => {
+    const base = value.toLowerCase().split(/[-_]/)[0];
+    return locales.find(locale => locale === base);
+  };
+  let saved: Locale | undefined;
+  try {
+    saved = match(localStorage.getItem(storageKey) ?? "");
+  } catch {
+    // Browser language still works when storage is blocked.
+  }
+  const locale = saved ?? preferred.map(match).find(Boolean) ?? "en";
+  const root = document.documentElement;
+  root.lang = locale;
+  root.dir = locale === "fa" ? "rtl" : "ltr";
+
+  // An unsupported primary language still needs browser translation, even
+  // when a supported secondary language or saved selection is available.
+  const nativeLanguage = match(preferred[0] ?? "") !== undefined;
+  root.translate = !nativeLanguage;
+  root.classList.toggle("notranslate", nativeLanguage);
+  const existing = document.head.querySelector('meta[name="google"][content="notranslate"]');
+  if (nativeLanguage && !existing) {
+    const meta = document.createElement("meta");
+    meta.name = "google";
+    meta.content = "notranslate";
+    document.head.append(meta);
+  } else if (!nativeLanguage) {
+    existing?.remove();
+  }
+  return locale;
+}

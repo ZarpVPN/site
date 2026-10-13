@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useI18n } from "./i18n";
+import { memo, useCallback, useEffect, useRef } from "react";
 import type { RefObject } from "react";
 import { Icon } from "./Icons";
-import "./HeroLayers.css";
 
 type PointerPosition = { x: number; y: number };
 
-function DottedSphere({
+const DottedSphere = memo(function DottedSphere({
   pointer,
   onReady,
 }: {
@@ -106,9 +106,10 @@ function DottedSphere({
     };
   }, [pointer, onReady]);
   return <canvas className="dotted-sphere" ref={canvas} />;
-}
+});
 
 export default function HeroLayers() {
+  const { t } = useI18n();
   const container = useRef<HTMLDivElement>(null);
   const pointerPosition = useRef<PointerPosition>({ x: 0, y: 0 });
   const redrawSphere = useRef<(() => void) | null>(null);
@@ -199,7 +200,7 @@ export default function HeroLayers() {
               />{" "}
               Zarp
             </span>
-            <span className="visual-tag">OPEN SOURCE</span>
+            <span className="visual-tag">{t("visualSource")}</span>
           </div>
           <p className="visual-subtitle">Cloudflare WARP + zapret2</p>
           <div className="power-emblem">
@@ -209,24 +210,20 @@ export default function HeroLayers() {
             </span>
           </div>
           <div className="visual-title">
-            <span /> Одно нажатие - и вперёд
-          </div>
-          <p className="visual-caption">Без ручной настройки</p>
+            <span /> {t("visualTitle")} </div>
+          <p className="visual-caption">{t("visualCaption")}</p>
           <div className="visual-card-bottom">
             <span>
-              <Icon name="shield" /> Автоподбор DPI
-            </span>
+              <Icon name="shield" /> {t("visualDpi")} </span>
             <Icon name="check" />
           </div>
         </div>
       </div>
       <div className="parallax-layer label-layer">
         <div className="orbit-label orbit-label-top">
-          <span /> WARP + DPI BYPASS
-        </div>
+          <span /> {t("visualBypass")} </div>
         <div className="orbit-label orbit-label-bottom">
-          <Icon name="code" /> built for an open internet
-        </div>
+          <Icon name="code" /> {t("visualInternet")} </div>
       </div>
     </div>
   );

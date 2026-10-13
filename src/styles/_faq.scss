@@ -1,0 +1,136 @@
+@use "breakpoints" as bp;
+
+.faq {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4.0625rem;
+  padding-bottom: 6.75rem;
+}
+
+.faq-heading {
+  .eyebrow {
+    margin-bottom: 1.0625rem;
+  }
+  > p:not(.eyebrow) {
+    font-size: 0.75rem;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-top: 1.125rem;
+  }
+  .text-link {
+    margin-top: 1.625rem;
+  }
+}
+
+.faq-list {
+  border-top: 1px solid #37383e;
+}
+
+.faq-item {
+  border-bottom: 1px solid #2c2d33;
+}
+
+.faq-question {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: start;
+  transition: color var(--transition-duration) var(--motion-ease);
+  padding: 1.375rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 550;
+  line-height: 1.6;
+  > .icon {
+    width: 1.0625rem;
+    height: 1.0625rem;
+    color: #979ba4;
+    transition: transform var(--transition-duration) var(--motion-ease),
+      color var(--transition-duration) var(--motion-ease);
+  }
+  &:hover {
+    color: var(--accent);
+  }
+  &[aria-expanded="true"] > .icon {
+    transform: rotate(45deg);
+    color: var(--accent);
+  }
+}
+
+.faq-answer {
+  padding-block: 0 1.5rem;
+  padding-inline: 0 1.875rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.9;
+  .text-link {
+    margin-top: 0.75rem;
+    color: #dd9a68;
+  }
+}
+
+@include bp.compact {
+  .faq {
+    gap: 2.5rem;
+  }
+}
+
+@include bp.tablet {
+  .faq {
+    grid-template-columns: 0.8fr 1.5fr;
+  }
+  .faq-question {
+    font-size: 0.75rem;
+  }
+}
+
+@include bp.mobile {
+  .faq {
+    grid-template-columns: 1fr;
+    gap: 1.6875rem;
+    padding-bottom: 4.0625rem;
+  }
+  .faq-heading {
+    .section-heading br {
+      display: none;
+    }
+    > p:not(.eyebrow) {
+      margin-top: 1rem;
+    }
+    > p:not(.eyebrow) br {
+      display: none;
+    }
+    .text-link {
+      margin-top: 1rem;
+    }
+  }
+  .faq-question {
+    font-size: 0.75rem;
+    padding: 1.3125rem 0;
+  }
+  .faq-answer {
+    font-size: 0.75rem;
+    padding-inline-end: 0;
+  }
+}
+
+.faq-answer-shell {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows var(--transition-duration) var(--motion-ease),
+    opacity var(--transition-duration) var(--motion-ease);
+  &.is-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+}
+
+.faq-answer-inner {
+  min-height: 0;
+  overflow: hidden;
+}

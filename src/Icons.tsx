@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 export type IconName =
   | "arrow"
   | "up-right"
@@ -16,7 +18,7 @@ export type IconName =
   | "plus"
   | "code"
   | "route";
-export function Icon({
+export const Icon = memo(function Icon({
   name,
   className = "",
 }: {
@@ -31,8 +33,8 @@ export function Icon({
       aria-hidden="true"
     />
   );
-}
-export function Logo() {
+});
+export const Logo = memo(function Logo() {
   return (
     <span className="logo">
       <img
@@ -44,4 +46,4 @@ export function Logo() {
       <span>Zarp</span>
     </span>
   );
-}
+});

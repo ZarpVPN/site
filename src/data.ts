@@ -23,7 +23,7 @@ export const platforms: {
     format: "EXE",
     requirements: "Windows 10 / 11 · x64",
     description:
-      "Один файл, без установщика. WARP устанавливается с вашего согласия, если его ещё нет. Нужны права администратора.",
+      "windowsDescription",
     screenshot: "windows-app.png",
     release: {
       version: "v1.5.0",
@@ -39,7 +39,7 @@ export const platforms: {
     format: "APK",
     requirements: "Android 8.0+ · arm64 / armv7 / x86_64",
     description:
-      "Собственный WARP-клиент. Без root и дополнительных приложений. При первом подключении разрешите создание VPN.",
+      "androidDescription",
     screenshot: "android-app.png",
     release: {
       version: "v1.1.1",
@@ -53,9 +53,9 @@ export const platforms: {
     label: "macOS",
     repo: "Zarp-MacOS",
     format: "DMG",
-    requirements: "macOS 14+ · Apple Silicon M1 и новее",
+    requirements: "macosRequirements",
     description:
-      "Нативное приложение для Mac. Без отдельного WARP. При первом запуске разрешите открытие и установите фоновую службу.",
+      "macosDescription",
     screenshot: "macos-app.png",
     release: {
       version: "v0.2.0",
@@ -67,37 +67,37 @@ export const platforms: {
 ];
 export const faqs = [
   {
-    q: "Что такое Zarp и чем он отличается от обычного VPN?",
-    a: "Zarp - открытый клиент, который помогает подключить Cloudflare WARP в сетях с блокировкой DPI. Он проверяет стратегии обхода и сохраняет рабочую. Windows и Android также поддерживают ваши VLESS, Trojan и Hysteria2 серверы и подписки. Zarp не продаёт доступ к собственной сети VPN-серверов.",
+    q: "faqWhatQuestion",
+    a: "faqWhatAnswer",
   },
   {
-    q: "Это бесплатно? Нужна регистрация?",
-    a: "Приложения Zarp бесплатны, отдельный аккаунт Zarp не нужен. На Android и macOS при первом запуске создаётся WARP-устройство после принятия условий Cloudflare. Собственный сервер или подписка, если вы их используете, оплачиваются отдельно выбранному провайдеру.",
+    q: "faqFreeQuestion",
+    a: "faqFreeAnswer",
   },
   {
-    q: "Будет ли работать у моего провайдера?",
-    a: "Результат зависит от вашей сети и её ограничений. Zarp тестирует стратегии именно на вашем соединении. Если быстрый поиск не помог, попробуйте полный. Во время поиска отключите другие VPN. Гарантировать обход в любой сети нельзя.",
+    q: "faqProviderQuestion",
+    a: "faqProviderAnswer",
   },
   {
-    q: "Собирает ли Zarp мои данные?",
-    a: "Согласно документации, у Zarp нет телеметрии и сбора персональных данных. Настройки и результаты проверок хранятся на устройстве. При использовании WARP трафик обрабатывает Cloudflare по своей политике приватности, а при использовании своего сервера - его оператор. Это не обещание полной анонимности.",
+    q: "faqDataQuestion",
+    a: "faqDataAnswer",
     link: "https://www.cloudflare.com/application/privacypolicy/",
-    label: "Политика Cloudflare",
+    label: "cloudflarePrivacy",
   },
   {
-    q: "Почему Windows или macOS предупреждают при запуске?",
-    a: "Windows-релиз v1.5.0 не подписан, поэтому SmartScreen может показывать предупреждение. Релиз macOS v0.2.0 не нотарифицирован Apple: первый запуск разрешается в «Системные настройки → Конфиденциальность и безопасность → Всё равно открыть». Контрольные суммы и подробности доступны на странице каждого релиза.",
+    q: "faqWarningsQuestion",
+    a: "faqWarningsAnswer",
     link: `${github}/Zarp-MacOS#why-wont-zarp-open`,
-    label: "Инструкция для macOS",
+    label: "macosGuide",
   },
   {
-    q: "Можно ли выбрать страну или отдельные приложения?",
-    a: "WARP не предлагает произвольный выбор страны выхода. Фильтры Россия, Иран и Китай выбирают стратегии для тестирования, а не страну вашего IP. В Windows маршрутизация и выбор приложений доступны со своим сервером; Android поддерживает выбор приложений и редактируемые правила. В macOS этих функций пока нет.",
+    q: "faqCountryQuestion",
+    a: "faqCountryAnswer",
   },
   {
-    q: "Где сообщить об ошибке или предложить улучшение?",
-    a: "Создайте issue в репозитории своей платформы. Укажите версию Zarp, операционную систему и описание проблемы. Перед отправкой логов удалите ссылки подписок, пароли и другие личные данные.",
+    q: "faqIssueQuestion",
+    a: "faqIssueAnswer",
     link: github,
-    label: "Открыть репозитории",
+    label: "openRepositories",
   },
 ];

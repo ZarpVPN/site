@@ -1,24 +1,26 @@
+import { useI18n } from "./i18n";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useEffect, useRef, useState } from "react";
-import type { KeyboardEvent } from "react";
 import { Icon, Logo } from "./Icons";
 import type { IconName } from "./Icons";
-import { faqs, github, platforms } from "./data";
+import { github, platforms } from "./data";
 import { useReleases } from "./useReleases";
 import { useSmoothAnchors } from "./useSmoothAnchors";
-import "./App.css";
-import "./motion.css";
 import HeroLayers from "./HeroLayers";
+import Product from "./Product";
+import FAQ from "./FAQ";
+import { DownloadCard } from "./DownloadCard";
 
 const copyrightYear = new Date().getFullYear();
 
-const asset = (file: string) => `${import.meta.env.BASE_URL}assets/${file}`;
 const external = { target: "_blank", rel: "noopener noreferrer" };
 const nav = [
-  { href: "#features", label: "Возможности" },
-  { href: "#how-it-works", label: "Как это работает" },
-  { href: "#faq", label: "Вопросы" },
+  { href: "#features", label: "features" },
+  { href: "#how-it-works", label: "howItWorks" },
+  { href: "#faq", label: "questions" },
 ];
 function Header() {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const header = useRef<HTMLElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
@@ -51,30 +53,31 @@ function Header() {
   return (
     <header className="header" ref={header}>
       <div className="container header-inner">
-        <a href="#" aria-label="Zarp - на главную">
+        <a href="#" aria-label={t("home")}>
           <Logo />
         </a>
         <nav
           className={open ? "navigation is-open" : "navigation"}
           id="main-nav"
-          aria-label="Главная навигация"
+          aria-label={t("navigation")}
         >
           {nav.map((item) => (
             <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
-              {item.label}
+              {t(item.label)}
             </a>
           ))}
           <a href={github} {...external} onClick={() => setOpen(false)}>
             GitHub <Icon name="up-right" />
           </a>
+          <LanguageSwitcher />
         </nav>
         <a className="button header-download" href="#download">
-          Скачать Zarp <Icon name="download" />
+          {t("downloadZarp")} <Icon name="download" />
         </a>
         <button
           ref={toggle}
           className="menu-toggle"
-          aria-label={open ? "Закрыть меню" : "Открыть меню"}
+          aria-label={open ? t("closeMenu") : t("openMenu")}
           aria-expanded={open}
           aria-controls="main-nav"
           onClick={() => setOpen(!open)}
@@ -87,30 +90,24 @@ function Header() {
 }
 
 function Hero() {
+  const { t } = useI18n();
   return (
     <section className="hero container" aria-labelledby="hero-title">
       <div className="hero-copy">
         <div className="hero-badge">
-          <span /> СВОБОДНЫЙ ИНТЕРНЕТ НАЧИНАЕТСЯ ЗДЕСЬ
-        </div>
+          <span /> {t("heroBadge")} </div>
         <h1 id="hero-title">
-          Интернет без
-          <br />
-          лишних <span>преград</span>
+          {t("heroTitle")} <br />
+          {t("heroTitleMiddle")} <span>{t("heroTitleAccent")}</span>
         </h1>
         <p className="hero-description">
-          Ваша сеть блокирует WARP? Zarp найдёт рабочий путь.
-          <br className="desktop-break" /> Автоматический обход DPI. Одно
-          нажатие.
-          <br className="desktop-break" /> Без ручной настройки.
-        </p>
+          {t("heroDescription")} <br className="desktop-break" /> {t("heroDescriptionSecond")} <br className="desktop-break" /> {t("heroDescriptionThird")} </p>
         <div className="hero-actions">
           <a className="button button-primary" href="#download">
-            Скачать бесплатно <Icon name="arrow" />
+            {t("downloadFree")} <Icon name="arrow" className="directional-arrow" />
           </a>
           <a className="button button-secondary" href={github} {...external}>
-            <Icon name="github" /> Открытый код
-          </a>
+            <Icon name="github" /> {t("openSource")} </a>
         </div>
         <div className="hero-platforms">
           {platforms.map((p) => (
@@ -120,36 +117,34 @@ function Hero() {
             </a>
           ))}
           <span className="platform-divider" />
-          <span className="no-account">Без регистрации</span>
+          <span className="no-account">{t("noRegistration")}</span>
         </div>
       </div>
       <div className="hero-visual">
         <HeroLayers />
       </div>
       <div className="hero-baseline">
-        <span>МЕНЬШЕ НАСТРОЕК · БОЛЬШЕ ИНТЕРНЕТА</span>
+        <span>{t("heroBaseline")}</span>
       </div>
     </section>
   );
 }
 
 function Features() {
+  const { t } = useI18n();
   return (
     <section className="features section-space container" id="features">
       <div className="section-intro">
         <div>
-          <p className="eyebrow">Продумано внутри</p>
+          <p className="eyebrow">{t("featuresEyebrow")}</p>
           <h2 className="section-heading">
-            Сложная технология
-            <br />
-            <span className="muted">Простой опыт</span>
+            {t("featuresTitle")} <br />
+            <span className="muted">{t("featuresSubtitle")}</span>
           </h2>
         </div>
         <p className="section-description">
-          Zarp берёт настройку соединения на себя.
-          <br />
-          Вы просто пользуетесь интернетом.
-        </p>
+          {t("featuresDescription")} <br />
+          {t("featuresDescriptionSecond")} </p>
       </div>
       <div className="feature-grid">
         <article className="feature-card feature-scan">
@@ -157,56 +152,47 @@ function Features() {
             <Icon name="route" />
           </div>
           <h3>
-            Находит путь,
-            <br />
-            который работает
-          </h3>
+            {t("scanTitle")} <br />
+            {t("scanSubtitle")} </h3>
           <p>
-            Подбирает стратегию обхода DPI для вашей сети. Каждый кандидат
-            проходит две проверки. Рабочий вариант сохраняется для следующих
-            подключений.
-          </p>
+            {t("scanDescription")} </p>
           <div className="scan-visual" aria-hidden="true">
             <div className="scan-row">
               <span className="scan-number">01</span>
               <span>MASQUE / HTTP3</span>
-              <span className="scan-result muted">проверка</span>
+              <span className="scan-result muted">{t("checking")}</span>
             </div>
             <div className="scan-row">
               <span className="scan-number">02</span>
               <span>TLS / HTTP2</span>
-              <span className="scan-result muted">проверка</span>
+              <span className="scan-result muted">{t("checking")}</span>
             </div>
             <div className="scan-row scan-success">
               <span className="scan-number">03</span>
-              <span>Рабочая стратегия</span>
+              <span>{t("workingStrategy")}</span>
               <span className="scan-result">
                 <Icon name="check" />
                 <Icon name="check" />
               </span>
             </div>
           </div>
-          <span className="visual-note">Схема автоматического подбора</span>
+          <span className="visual-note">{t("scanNote")}</span>
         </article>
         <article className="feature-card feature-privacy">
           <div className="feature-icon">
             <Icon name="shield" />
           </div>
           <h3>
-            Открытый код
-            <br />
-            Без телеметрии
-          </h3>
+            {t("openSource")} <br />
+            {t("noTelemetry")} </h3>
           <p>
-            В Zarp нет сбора персональных данных. Настройки остаются на
-            устройстве, а код доступен для проверки.
-          </p>
+            {t("privacyDescription")} </p>
           <div className="privacy-visual" aria-hidden="true">
             <div className="shield-ring ring-outer" />
             <div className="shield-ring ring-inner" />
             <Icon name="shield" />
             <span className="privacy-badge">
-              <Icon name="check" /> No telemetry
+              <Icon name="check" /> {t("noTelemetry")}
             </span>
           </div>
           <a
@@ -214,7 +200,7 @@ function Features() {
             href={`${github}/Zarp#privacy`}
             {...external}
           >
-            Как устроена приватность <Icon name="up-right" />
+            {t("privacyLink")} <Icon name="up-right" />
           </a>
         </article>
         <article className="feature-card compact-card">
@@ -222,11 +208,9 @@ function Features() {
             <Icon name="refresh" />
           </div>
           <div>
-            <h3>Восстанавливает связь</h3>
+            <h3>{t("restoreTitle")}</h3>
             <p>
-              Если сохранённая стратегия перестала работать, Zarp пробует другие
-              проверенные варианты.
-            </p>
+              {t("restoreDescription")} </p>
           </div>
         </article>
         <article className="feature-card compact-card">
@@ -234,123 +218,28 @@ function Features() {
             <Icon name="bolt" />
           </div>
           <div>
-            <h3>Без лишней нагрузки</h3>
+            <h3>{t("lightweightTitle")}</h3>
             <p>
-              Обход DPI нацелен на установление соединения. Сам трафик туннеля
-              не изменяется стратегией.
-            </p>
+              {t("lightweightDescription")} </p>
           </div>
         </article>
       </div>
       <div className="facts-row">
         <span>
-          <b>3</b> платформы
-        </span>
+          <b>3</b> {t("platforms")} </span>
         <span>
-          <b>8</b> языков интерфейса
-        </span>
+          <b>8</b> {t("interfaceLanguages")} </span>
         <span>
-          <Icon name="code" /> публичные исходники
-        </span>
+          <Icon name="code" /> {t("publicSource")} </span>
         <span>
-          <Icon name="check" /> бесплатные приложения
-        </span>
-      </div>
-    </section>
-  );
-}
-
-function Product() {
-  const [selected, setSelected] = useState(0);
-  const current = platforms[selected];
-  const keys = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    let next = index;
-    if (event.key === "ArrowRight") next = (index + 1) % platforms.length;
-    else if (event.key === "ArrowLeft")
-      next = (index + platforms.length - 1) % platforms.length;
-    else if (event.key === "Home") next = 0;
-    else if (event.key === "End") next = platforms.length - 1;
-    else return;
-    event.preventDefault();
-    setSelected(next);
-    document.getElementById(`tab-${platforms[next].id}`)?.focus();
-  };
-  return (
-    <section className="product section-space container">
-      <div className="section-intro">
-        <div>
-          <p className="eyebrow">Никакой магии. Просто Zarp</p>
-          <h2 className="section-heading">
-            Одна кнопка
-            <br />
-            <span className="muted">На ваших устройствах</span>
-          </h2>
-        </div>
-        <div
-          className="platform-tabs"
-          role="tablist"
-          aria-label="Скриншоты приложений"
-        >
-          {platforms.map((p, i) => (
-            <button
-              key={p.id}
-              id={`tab-${p.id}`}
-              role="tab"
-              aria-selected={selected === i}
-              aria-controls="product-panel"
-              tabIndex={selected === i ? 0 : -1}
-              onKeyDown={(e) => keys(e, i)}
-              onClick={() => setSelected(i)}
-            >
-              <Icon name={p.id} />
-              {p.label}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div
-        className={`product-window product-${current.id}`}
-        role="tabpanel"
-        id="product-panel"
-        aria-labelledby={`tab-${current.id}`}
-        tabIndex={0}
-      >
-        <div className="window-toolbar">
-          <span className="window-dots">
-            <i />
-            <i />
-            <i />
-          </span>
-          <span>Zarp для {current.label}</span>
-        </div>
-        <div className="screenshot-area">
-          {platforms.map((p, i) => (
-            <img
-              key={p.id}
-              className={selected === i ? "is-active" : ""}
-              src={asset(p.screenshot)}
-              alt={`Официальный скриншот Zarp для ${p.label}: главный экран, стратегии и настройки`}
-              aria-hidden={selected !== i}
-              loading="lazy"
-              width={p.id === "macos" ? 2000 : p.id === "android" ? 1136 : 1252}
-              height={p.id === "macos" ? 827 : p.id === "android" ? 704 : 768}
-            />
-          ))}
-        </div>
-        <div className="screenshot-caption">
-          <span>
-            <span className="small-dot" /> Реальный интерфейс приложения
-          </span>
-          <a href={`${github}/${current.repo}`} {...external}>
-            Репозиторий {current.label} <Icon name="up-right" />
-          </a>
-        </div>
+          <Icon name="check" /> {t("freeApps")} </span>
       </div>
     </section>
   );
 }
 
 function GettingStarted() {
+  const { t } = useI18n();
   return (
     <section
       className="getting-started section-space container"
@@ -358,38 +247,35 @@ function GettingStarted() {
     >
       <div className="section-intro">
         <div>
-          <p className="eyebrow">От загрузки до подключения</p>
+          <p className="eyebrow">{t("stepsEyebrow")}</p>
           <h2 className="section-heading">
-            Начать проще,
-            <br />
-            <span className="muted">чем кажется</span>
+            {t("stepsTitle")} <br />
+            <span className="muted">{t("stepsSubtitle")}</span>
           </h2>
         </div>
         <p className="section-description">
-          Первая проверка может занять минуту-две.
-          <br />
-          Дальше Zarp использует сохранённую стратегию.
-        </p>
+          {t("stepsDescription")} <br />
+          {t("stepsDescriptionSecond")} </p>
       </div>
       <div className="steps">
         {[
           {
             n: "01",
             icon: "download",
-            title: "Скачайте приложение",
-            text: "Выберите свою платформу. Все файлы - из официальных релизов на GitHub.",
+            title: "stepDownload",
+            text: "stepDownloadText",
           },
           {
             n: "02",
             icon: "power",
-            title: "Нажмите подключить",
-            text: "Пройдите первый запуск по инструкции платформы и отключите другие VPN перед поиском.",
+            title: "stepConnect",
+            text: "stepConnectText",
           },
           {
             n: "03",
             icon: "check",
-            title: "Zarp найдёт стратегию",
-            text: "Приложение проверит варианты, сохранит рабочий и подключится. Результат зависит от вашей сети.",
+            title: "stepStrategy",
+            text: "stepStrategyText",
           },
         ].map((step) => (
           <article className="step" key={step.n}>
@@ -397,8 +283,8 @@ function GettingStarted() {
               <span>{step.n}</span>
               <Icon name={step.icon as IconName} />
             </div>
-            <h3>{step.title}</h3>
-            <p>{step.text}</p>
+            <h3>{t(step.title)}</h3>
+            <p>{t(step.text)}</p>
           </article>
         ))}
       </div>
@@ -407,25 +293,23 @@ function GettingStarted() {
 }
 
 function Advanced() {
+  const { t } = useI18n();
   return (
     <section className="advanced container">
       <div className="advanced-copy">
-        <p className="eyebrow">Для тех, кто хочет больше</p>
+        <p className="eyebrow">{t("advancedEyebrow")}</p>
         <h2>
-          Ваш сервер
-          <br />
-          <span className="muted">Тот же умный подход</span>
+          {t("advancedTitle")} <br />
+          <span className="muted">{t("advancedSubtitle")}</span>
         </h2>
         <p>
-          На Windows и Android можно подключить собственный сервер или
-          HTTPS-подписку. Zarp подберёт рабочую пару «стратегия + сервер».
-        </p>
+          {t("advancedDescription")} </p>
         <a
           className="text-link"
           href={`${github}/Zarp/blob/main/docs/connection-settings.md`}
           {...external}
         >
-          Подробнее о настройке <Icon name="up-right" />
+          {t("settingsLink")} <Icon name="up-right" />
         </a>
       </div>
       <div className="advanced-options">
@@ -438,26 +322,26 @@ function Advanced() {
         <div className="route-item">
           <Icon name="route" />
           <div>
-            <h3>Гибкая маршрутизация</h3>
-            <p>Direct, Proxy и Block. Правила для доменов и IP.</p>
+            <h3>{t("routingTitle")}</h3>
+            <p>{t("routingDescription")}</p>
           </div>
         </div>
         <div className="route-item">
           <Icon name="windows" />
           <div>
-            <h3>Выбор приложений</h3>
-            <p>Решайте, какие программы используют туннель.</p>
+            <h3>{t("appSelection")}</h3>
+            <p>{t("appSelectionText")}</p>
           </div>
         </div>
         <span className="advanced-note">
-          Поддержка зависит от платформы и параметров сервера.
-        </span>
+          {t("advancedNote")} </span>
       </div>
     </section>
   );
 }
 
 function Downloads() {
+  const { t } = useI18n();
   const { releases, live } = useReleases();
   const [detected] = useState(() => {
     const agent = navigator.userAgent;
@@ -469,161 +353,53 @@ function Downloads() {
   return (
     <section className="downloads section-space container" id="download">
       <div className="download-heading">
-        <p className="eyebrow">Готовы подключиться?</p>
+        <p className="eyebrow">{t("downloadEyebrow")}</p>
         <h2 className="section-heading">
-          Ваш интернет
-          <br />
-          <span className="accent">В одном скачивании</span>
+          {t("downloadTitle")} <br />
+          <span className="accent">{t("downloadSubtitle")}</span>
         </h2>
-        <p>Выберите платформу. Установите Zarp. Найдите свой путь.</p>
+        <p>{t("downloadDescription")}</p>
       </div>
       <div className="download-grid">
-        {platforms.map((p) => {
-          const r = releases[p.id];
-          return (
-            <article
-              className={`download-card ${detected === p.id ? "recommended" : ""}`}
-              id={`download-${p.id}`}
-              key={p.id}
-            >
-              <div className="download-card-top">
-                <span className="os-icon">
-                  <Icon name={p.id} />
-                </span>
-                <span className="release-version">{r.version}</span>
-              </div>
-              <div className="os-heading">
-                <h3>{p.label}</h3>
-                {detected === p.id && (
-                  <span className="recommended-tag">Ваше устройство</span>
-                )}
-              </div>
-              <p className="os-requirements">{p.requirements}</p>
-              <p className="os-description">{p.description}</p>
-              <a
-                className={`button ${detected === p.id ? "button-primary" : "button-secondary"} download-button`}
-                href={r.url}
-              >
-                <Icon name="download" />
-                Скачать для {p.label}
-                <Icon name="arrow" />
-              </a>
-              <div className="download-meta">
-                <span>
-                  {p.format} · {(r.size / 1024 / 1024).toFixed(1)} МБ
-                </span>
-                <a href={r.releaseUrl} {...external}>
-                  О релизе <Icon name="up-right" />
-                </a>
-              </div>
-              <a
-                className="install-guide"
-                href={`${github}/${p.repo}#${p.id === "macos" ? "first-launch" : "usage"}`}
-                {...external}
-              >
-                Инструкция по установке <Icon name="up-right" />
-              </a>
-            </article>
-          );
-        })}
+        {platforms.map(p => (
+          <DownloadCard
+            key={p.id}
+            platform={p}
+            release={releases[p.id]}
+            recommended={detected === p.id}
+          />
+        ))}
       </div>
       <div className="download-footnote">
         <span>
           <Icon name="github" />
           {live
-            ? "Последние релизы проверены на GitHub"
-            : "Релизы проверены 13 октября 2026 · при доступности GitHub обновляются автоматически"}
+            ? t("releasesLive")
+            : t("releasesFallback")}
         </span>
         <a href={github} {...external}>
-          Все репозитории <Icon name="up-right" />
+          {t("allRepositories")} <Icon name="up-right" />
         </a>
-      </div>
-    </section>
-  );
-}
-
-function FAQ() {
-  const [expanded, setExpanded] = useState<Set<number>>(new Set());
-  const toggle = (index: number) =>
-    setExpanded((current) => {
-      const next = new Set(current);
-      if (next.has(index)) next.delete(index);
-      else next.add(index);
-      return next;
-    });
-  return (
-    <section className="faq section-space container" id="faq">
-      <div className="faq-heading">
-        <p className="eyebrow">Без недосказанности</p>
-        <h2 className="section-heading">
-          Хорошие
-          <br />
-          вопросы
-        </h2>
-        <p>
-          То, что полезно знать
-          <br />
-          до первого подключения.
-        </p>
-        <a className="text-link" href={github} {...external}>
-          Спросить на GitHub <Icon name="up-right" />
-        </a>
-      </div>
-      <div className="faq-list">
-        {faqs.map((faq, index) => (
-          <article className="faq-item" key={faq.q}>
-            <h3>
-              <button
-                className="faq-question"
-                aria-expanded={expanded.has(index)}
-                aria-controls={`faq-answer-${index}`}
-                id={`faq-question-${index}`}
-                onClick={() => toggle(index)}
-              >
-                {faq.q}
-                <Icon name="plus" />
-              </button>
-            </h3>
-            <div
-              className={`faq-answer-shell ${expanded.has(index) ? "is-open" : ""}`}
-              id={`faq-answer-${index}`}
-              role="region"
-              aria-labelledby={`faq-question-${index}`}
-              aria-hidden={!expanded.has(index)}
-              inert={!expanded.has(index)}
-            >
-              <div className="faq-answer-inner">
-                <div className="faq-answer">
-                  <p>{faq.a}</p>
-                  {faq.link && (
-                    <a className="text-link" href={faq.link} {...external}>
-                      {faq.label} <Icon name="up-right" />
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          </article>
-        ))}
       </div>
     </section>
   );
 }
 
 function Footer() {
+  const { t } = useI18n();
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-top">
           <div>
-            <a href="#" aria-label="Zarp - на главную">
+            <a href="#" aria-label={t("home")}>
               <Logo />
             </a>
-            <p>Меньше преград · Больше возможностей</p>
+            <p>{t("footerTagline")}</p>
           </div>
           <div className="footer-links">
             <div>
-              <span>ПРИЛОЖЕНИЯ</span>
+              <span>{t("apps")}</span>
               {platforms.map((p) => (
                 <a key={p.id} href={`#download-${p.id}`}>
                   {p.label}
@@ -631,27 +407,25 @@ function Footer() {
               ))}
             </div>
             <div>
-              <span>ПРОЕКТ</span>
+              <span>{t("project")}</span>
               <a href={github} {...external}>
-                Исходный код <Icon name="up-right" />
+                {t("sourceCode")} <Icon name="up-right" />
               </a>
               <a href={`${github}/Zarp/issues`} {...external}>
-                Обратная связь <Icon name="up-right" />
+                {t("feedback")} <Icon name="up-right" />
               </a>
               <a href={`${github}/Zarp#privacy`} {...external}>
-                Приватность <Icon name="up-right" />
+                {t("privacy")} <Icon name="up-right" />
               </a>
             </div>
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {copyrightYear} Zarp · Open source</span>
+          <span>© {copyrightYear} Zarp · {t("openSource")}</span>
           <p>
-            Zarp - независимый проект. Не связан с Cloudflare и не одобрен ею.
-            <br />
-            Cloudflare и WARP - товарные знаки Cloudflare, Inc.
-          </p>
-          <a href="#" className="back-top" aria-label="Наверх">
+            {t("disclaimer")} <br />
+            {t("trademarks")} </p>
+          <a href="#" className="back-top" aria-label={t("backTop")}>
             <Icon name="arrow" />
           </a>
         </div>
@@ -661,12 +435,12 @@ function Footer() {
 }
 
 export default function App() {
+  const { t } = useI18n();
   useSmoothAnchors();
   return (
     <>
       <a className="skip-link" href="#main">
-        К содержимому
-      </a>
+        {t("skipContent")} </a>
       <Header />
       <main id="main">
         <Hero />

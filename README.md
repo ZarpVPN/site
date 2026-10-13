@@ -1,6 +1,6 @@
 # Zarp
 
-Сайт Zarp на React, Vite и TypeScript. Требуется Node.js 24.
+Сайт Zarp на React, Vite, TypeScript и SCSS. Требуется Node.js 24.
 
 ## Запуск
 
