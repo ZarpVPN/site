@@ -8,8 +8,8 @@
   grid-template-rows: 0fr;
   opacity: 0;
   transition:
-    grid-template-rows 0.5s var(--motion-ease),
-    opacity 0.35s var(--motion-ease);
+    grid-template-rows var(--transition-duration) var(--motion-ease),
+    opacity var(--transition-duration) var(--motion-ease);
 }
 
 .faq-answer-shell.is-open {
@@ -23,10 +23,10 @@
 }
 
 .download-card {
-  transition: none;
+  transition: transform var(--transition-duration) ease-in-out;
 }
 .feature-card {
-  transition: transform 0.4s ease-in-out;
+  transition: transform var(--transition-duration) ease-in-out;
 }
 .menu-toggle,
 .footer-links a,
@@ -35,9 +35,9 @@
 .download-footnote a,
 .screenshot-caption a {
   transition:
-    color 0.35s var(--motion-ease),
-    background-color 0.35s var(--motion-ease),
-    border-color 0.35s var(--motion-ease);
+    color var(--transition-duration) var(--motion-ease),
+    background-color var(--transition-duration) var(--motion-ease),
+    border-color var(--transition-duration) var(--motion-ease);
 }
 
 @media (hover: hover) {
@@ -99,9 +99,9 @@
     pointer-events: none;
     transform: translateY(-0.65rem);
     transition:
-      opacity 0.3s var(--motion-ease),
-      transform 0.4s var(--motion-ease),
-      visibility 0.4s;
+      opacity var(--transition-duration) var(--motion-ease),
+      transform var(--transition-duration) var(--motion-ease),
+      visibility var(--transition-duration);
   }
   .navigation.is-open {
     opacity: 1;

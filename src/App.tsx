@@ -4,6 +4,7 @@ import { Icon, Logo } from "./Icons";
 import type { IconName } from "./Icons";
 import { faqs, github, platforms } from "./data";
 import { useReleases } from "./useReleases";
+import { useSmoothAnchors } from "./useSmoothAnchors";
 import "./App.css";
 import "./motion.css";
 import HeroLayers from "./HeroLayers";
@@ -127,9 +128,6 @@ function Hero() {
       </div>
       <div className="hero-baseline">
         <span>МЕНЬШЕ НАСТРОЕК · БОЛЬШЕ ИНТЕРНЕТА</span>
-        <a href="#features" aria-label="Перейти к возможностям">
-          <Icon name="arrow" />
-        </a>
       </div>
     </section>
   );
@@ -324,13 +322,6 @@ function Product() {
             <i />
           </span>
           <span>Zarp для {current.label}</span>
-          <a
-            href={asset(current.screenshot)}
-            {...external}
-            aria-label={`Открыть скриншот ${current.label} в полном размере`}
-          >
-            <Icon name="up-right" />
-          </a>
         </div>
         <div className="screenshot-area">
           {platforms.map((p, i) => (
@@ -628,11 +619,7 @@ function Footer() {
             <a href="#" aria-label="Zarp — на главную">
               <Logo />
             </a>
-            <p>
-              Меньше преград
-              <br />
-              Больше возможностей
-            </p>
+            <p>Меньше преград · Больше возможностей</p>
           </div>
           <div className="footer-links">
             <div>
@@ -674,6 +661,7 @@ function Footer() {
 }
 
 export default function App() {
+  useSmoothAnchors();
   return (
     <>
       <a className="skip-link" href="#main">

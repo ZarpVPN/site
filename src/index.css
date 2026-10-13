@@ -2,6 +2,7 @@
 :root {
   font-size: clamp(16px, 1.111111vw, 32px);
   --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-duration: 0.1s;
   font-family: "Manrope Variable", sans-serif;
   color: #f5f5f6;
   background: #101113;
@@ -125,8 +126,8 @@ section[id] {
   font-size: 0.8125rem;
   font-weight: 750;
   transition:
-    transform 0.4s ease-in-out,
-    border-color 0.4s ease-in-out;
+    transform var(--transition-duration) ease-in-out,
+    border-color var(--transition-duration) ease-in-out;
 }
 .button-primary {
   background: var(--accent);
@@ -150,7 +151,7 @@ section[id] {
   font-size: 0.75rem;
   font-weight: 650;
   color: #b9bbc1;
-  transition: color 0.35s var(--motion-ease);
+  transition: color var(--transition-duration) var(--motion-ease);
 }
 .text-link:hover {
   color: var(--accent);
@@ -182,10 +183,5 @@ section[id] {
   .button {
     min-height: 3.125rem;
     padding: 0.8125rem 1.125rem;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
   }
 }
