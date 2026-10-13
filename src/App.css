@@ -2,9 +2,21 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  background: #101113eb;
-  backdrop-filter: blur(1.125rem);
+  padding-top: var(--safe-area-top);
+  /* Match the browser's top inset without filtering the viewport edge. */
+  background: linear-gradient(var(--page-background), var(--page-background))
+    top / 100% calc(var(--safe-area-top) + 1px) no-repeat;
   border-bottom: 1px solid #ffffff08;
+}
+.header::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--safe-area-top) + 1px) 0 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(var(--page-background), #101113eb 1.125rem);
+  -webkit-backdrop-filter: blur(1.125rem);
+  backdrop-filter: blur(1.125rem);
 }
 .header-inner {
   height: 5.375rem;
@@ -886,6 +898,7 @@
   border-top: 1px solid #2d2e33;
   background: #121315;
   padding-top: 1rem;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 .footer-top {
   display: flex;
@@ -971,7 +984,7 @@
 }
 @media (max-width: 1050px) {
   .container {
-    width: calc(100% - 4rem);
+    width: calc(100% - 4rem - 2 * var(--safe-area-inline));
   }
   .navigation {
     gap: 1.25rem;
@@ -1135,7 +1148,7 @@
 }
 @media (max-width: 700px) {
   .container {
-    width: calc(100% - 2.5rem);
+    width: calc(100% - 2.5rem - 2 * var(--safe-area-inline));
   }
   .header-inner {
     height: 4.375rem;
@@ -1167,7 +1180,7 @@
   .navigation {
     display: flex;
     position: absolute;
-    top: 4.3125rem;
+    top: 100%;
     left: 0;
     right: 0;
     padding: 1.375rem 1.5rem;

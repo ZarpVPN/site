@@ -31,7 +31,7 @@ function Header() {
         `${element.getBoundingClientRect().height}px`,
       );
     const observer = new ResizeObserver(measure);
-    observer.observe(element);
+    observer.observe(element, { box: "border-box" });
     measure();
     return () => {
       observer.disconnect();
