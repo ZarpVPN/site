@@ -75,7 +75,7 @@ const ProductScreenshot = memo(function ProductScreenshot() {
         alt={t("screenshotAlt", { platform: platform.label })}
         loading="lazy"
         width={platform.id === "macos" ? 2000 : platform.id === "android" ? 1136 : 1252}
-        height={platform.id === "macos" ? 827 : platform.id === "android" ? 704 : 768}
+        height={platform.id === "macos" ? 827 : platform.id === "android" ? 703 : 768}
       />
     </div>
   );

@@ -351,10 +351,11 @@ function Advanced() {
 
 function Downloads() {
   const { t } = useI18n();
-  const { releases, live } = useReleases();
+  const section = useRef<HTMLElement>(null);
+  const { releases, live } = useReleases(section);
   const detected = useSyncExternalStore(subscribeToDevice, browserDevice, serverDevice);
   return (
-    <section className="downloads section-space container" id="download">
+    <section className="downloads section-space container" id="download" ref={section}>
       <div className="download-heading">
         <p className="eyebrow">{t("downloadEyebrow")}</p>
         <h2 className="section-heading">

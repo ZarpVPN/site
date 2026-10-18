@@ -24,7 +24,7 @@ export const platforms: {
     requirements: "Windows 10 / 11 · x64",
     description:
       "windowsDescription",
-    screenshot: "windows-app.png",
+    screenshot: "windows-app.webp",
     release: {
       version: "v1.5.0",
       size: 32550400,
@@ -40,7 +40,7 @@ export const platforms: {
     requirements: "Android 8.0+ · arm64 / armv7 / x86_64",
     description:
       "androidDescription",
-    screenshot: "android-app.png",
+    screenshot: "android-app.webp",
     release: {
       version: "v1.1.1",
       size: 52102257,
@@ -56,7 +56,7 @@ export const platforms: {
     requirements: "macosRequirements",
     description:
       "macosDescription",
-    screenshot: "macos-app.png",
+    screenshot: "macos-app.webp",
     release: {
       version: "v0.2.0",
       size: 11128210,

@@ -4,11 +4,16 @@ import { createServer } from "vite";
 
 const dist = resolve("dist");
 const template = await readFile(join(dist, "index.html"), "utf8");
+const stylesheetTag = template.match(/<link rel="stylesheet" crossorigin href="(\/assets\/[^"/]+\.css)">/);
+if (!stylesheetTag) throw new Error("Vite output is missing the site stylesheet");
+const stylesheet = await readFile(join(dist, stylesheetTag[1].slice(1)), "utf8");
+if (/<\/style/i.test(stylesheet)) throw new Error("Stylesheet cannot be safely inlined");
+const styledTemplate = template.replace(stylesheetTag[0], `<style data-site-styles>${stylesheet}</style>`);
 const startMarker = "<!-- SEO_START -->";
 const endMarker = "<!-- SEO_END -->";
-const headStart = template.indexOf(startMarker);
-const headEnd = template.indexOf(endMarker);
-if (headStart < 0 || headEnd < headStart || !template.includes('<div id="root"></div>')) {
+const headStart = styledTemplate.indexOf(startMarker);
+const headEnd = styledTemplate.indexOf(endMarker);
+if (headStart < 0 || headEnd < headStart || !styledTemplate.includes('<div id="root"></div>')) {
   throw new Error("Vite output is missing the SEO or React root marker");
 }
 
@@ -51,7 +56,7 @@ try {
       `<title>${escapeHtml(seo.title)}</title>`,
       `<script type="application/ld+json">${JSON.stringify(seo.structuredData).replace(/</g, "\\u003c")}</script>`,
     ].join("\n    ");
-    const localized = template.replace(
+    const localized = styledTemplate.replace(
       '<html lang="en">',
       `<html lang="${locale}" dir="${locale === "fa" ? "rtl" : "ltr"}">`,
     );

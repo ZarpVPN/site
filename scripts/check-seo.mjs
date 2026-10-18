@@ -15,6 +15,8 @@ for (const locale of locales) {
   assert.ok(html.includes('<main id="main">'));
   assert.ok(html.includes('<h1 id="hero-title">'));
   assert.ok(html.includes('<section class="downloads'));
+  assert.ok(html.includes('<style data-site-styles>'));
+  assert.ok(!html.includes('rel="stylesheet"'));
   assert.ok(html.includes(`rel="canonical" href="${url(locale)}"`));
   assert.ok(html.includes('name="description" content="'));
   assert.equal((html.match(/<title>/g) ?? []).length, 1);
