@@ -3,16 +3,16 @@ import type { ReactNode } from "react";
 import english from "./locales/en";
 import { I18nContext, LanguageContext, LanguagePendingContext, LanguageFailureContext, loadLanguage, storageKey } from "./i18n";
 import type { Locale, Messages, Selection, Translate } from "./i18n";
+import { localePath } from "./languagePreferences";
 
 export function I18nProvider({ initial, children }: { initial: Selection; children: ReactNode }) {
-  const [selection, setSelection] = useState(initial);
+  const [selection] = useState(initial);
   const [pending, setPending] = useState(false);
   const [failed, setFailed] = useState(false);
   const request = useRef(0);
-  const currentSelection = useRef(initial);
   const selectLanguage = useCallback(async (locale: Locale) => {
     const current = ++request.current;
-    if (currentSelection.current.locale === locale) {
+    if (selection.locale === locale) {
       setPending(false);
       setFailed(false);
       try { localStorage.setItem(storageKey, locale); } catch { /* Storage is optional. */ }
@@ -21,17 +21,16 @@ export function I18nProvider({ initial, children }: { initial: Selection; childr
     setPending(true);
     setFailed(false);
     try {
-      const next = await loadLanguage(locale);
+      await loadLanguage(locale);
       if (current !== request.current) return;
-      currentSelection.current = next;
-      setSelection(next);
       try { localStorage.setItem(storageKey, locale); } catch { /* Selection still works without storage. */ }
+      window.location.assign(`${localePath(locale)}${window.location.search}${window.location.hash}`);
     } catch {
       if (current === request.current) setFailed(true);
     } finally {
       if (current === request.current) setPending(false);
     }
-  }, []);
+  }, [selection.locale]);
   const value = useMemo(() => ({
     locale: selection.locale,
     t: ((key, values) => {
@@ -43,11 +42,13 @@ export function I18nProvider({ initial, children }: { initial: Selection; childr
   useLayoutEffect(() => {
     document.documentElement.lang = selection.locale;
     document.documentElement.dir = selection.locale === "fa" ? "rtl" : "ltr";
-    document.title = selection.messages.siteTitle;
-    for (const selector of ['meta[name="description"]', 'meta[property="og:description"]']) {
-      document.querySelector(selector)?.setAttribute("content", selection.messages.siteDescription);
+    if (!document.querySelector('link[rel="canonical"]')) {
+      document.title = selection.messages.siteTitle;
+      for (const selector of ['meta[name="description"]', 'meta[property="og:description"]']) {
+        document.querySelector(selector)?.setAttribute("content", selection.messages.siteDescription);
+      }
+      document.querySelector('meta[property="og:title"]')?.setAttribute("content", selection.messages.siteTitle);
     }
-    document.querySelector('meta[property="og:title"]')?.setAttribute("content", selection.messages.siteTitle);
   }, [selection]);
 
   return (

@@ -111,7 +111,7 @@ const messages = {
   "visualBypass": "WARP + عبور از DPI",
   "visualInternet": "برای اینترنت آزاد",
   "language": "زبان",
-  "siteTitle": "Zarp - اینترنت بدون موانع اضافی",
+  "siteTitle": "Zarp - کلاینت متن‌باز Cloudflare WARP",
   "siteDescription": "Zarp کلاینت VPN متن‌باز با عبور خودکار از DPI است. Cloudflare WARP و سرورهای خودتان. برای Windows، Android و macOS.",
   "faqWhatQuestion": "Zarp چیست و چه تفاوتی با VPN معمولی دارد؟",
   "faqWhatAnswer": "Zarp کلاینتی متن‌باز است که به اتصال Cloudflare WARP در شبکه‌های دارای مسدودسازی DPI کمک می‌کند. راهبردهای عبور را بررسی و گزینه موفق را ذخیره می‌کند. Windows و Android از سرورها و اشتراک‌های VLESS، Trojan و Hysteria2 شما نیز پشتیبانی می‌کنند. Zarp دسترسی به شبکه سرورهای VPN اختصاصی نمی‌فروشد.",

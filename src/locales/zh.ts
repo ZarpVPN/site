@@ -111,7 +111,7 @@ const messages = {
   "visualBypass": "WARP + 绕过 DPI",
   "visualInternet": "为开放互联网而生",
   "language": "语言",
-  "siteTitle": "Zarp - 告别多余的网络阻碍",
+  "siteTitle": "Zarp - 开源 Cloudflare WARP 客户端",
   "siteDescription": "Zarp 是开源 VPN 客户端，支持自动绕过 DPI、Cloudflare WARP 及自有服务器。下载 Windows、Android 和 macOS 版本。",
   "faqWhatQuestion": "Zarp 是什么？它与普通 VPN 有何不同？",
   "faqWhatAnswer": "Zarp 是开源客户端，帮助在有 DPI 封锁的网络中连接 Cloudflare WARP。它会测试绕过策略并保存可用方案。Windows 和 Android 也支持你自己的 VLESS、Trojan、Hysteria2 服务器和订阅。Zarp 不出售自有 VPN 服务器网络的访问权限。",

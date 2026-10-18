@@ -3,6 +3,7 @@
 export const supportedLocales = ["en", "ru", "es", "pt", "zh", "fr", "de", "fa"] as const;
 export type Locale = (typeof supportedLocales)[number];
 export const languageStorageKey = "zarp-language";
+export const localePath = (locale: Locale) => locale === "en" ? "/" : `/${locale}/`;
 
 // Also runs inline in the HTML head, before React or translation detection.
 // Keep this function self-contained so its compiled source can be injected.
@@ -18,7 +19,12 @@ export function initializePageLanguage(locales: readonly Locale[], storageKey: s
   } catch {
     // Browser language still works when storage is blocked.
   }
-  const locale = saved ?? preferred.map(match).find(Boolean) ?? "en";
+  const routeLocale = locales.find(locale => locale === location.pathname.split("/")[1]?.toLowerCase());
+  const locale = routeLocale ?? "en";
+  const preferredLocale = saved ?? preferred.map(match).find(Boolean) ?? "en";
+  if ((location.pathname === "/" || location.pathname === "/index.html") && preferredLocale !== "en") {
+    location.replace(`/${preferredLocale}/${location.search}${location.hash}`);
+  }
   const root = document.documentElement;
   root.lang = locale;
   root.dir = locale === "fa" ? "rtl" : "ltr";

@@ -111,7 +111,7 @@ const messages = {
   "visualBypass": "WARP + DPI-UMGEHUNG",
   "visualInternet": "für ein offenes Internet",
   "language": "Sprache",
-  "siteTitle": "Zarp - Internet ohne unnötige Hürden",
+  "siteTitle": "Zarp - Open-Source-VPN-Client für Cloudflare WARP",
   "siteDescription": "Zarp ist ein Open-Source-VPN-Client mit automatischer DPI-Umgehung. Cloudflare WARP und eigene Server. Für Windows, Android und macOS.",
   "faqWhatQuestion": "Was ist Zarp und wie unterscheidet es sich von einem normalen VPN?",
   "faqWhatAnswer": "Zarp ist ein offener Client, der Cloudflare WARP in Netzwerken mit DPI-Sperren verbindet. Er prüft Umgehungsstrategien und speichert eine funktionierende. Windows und Android unterstützen auch deine VLESS-, Trojan- und Hysteria2-Server und Abonnements. Zarp verkauft keinen Zugang zu einem eigenen VPN-Servernetz.",

@@ -4,7 +4,7 @@ import { initializePageLanguage, languageStorageKey, supportedLocales } from "./
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "./",
+  base: "/",
   plugins: [
     react(),
     {

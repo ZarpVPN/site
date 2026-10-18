@@ -28,12 +28,12 @@ function useProductSelection() {
 
 export function useSelectedPlatform() {
   const selection = useProductSelection();
-  const index = useSyncExternalStore(selection.subscribe, selection.getSnapshot);
+  const index = useSyncExternalStore(selection.subscribe, selection.getSnapshot, () => 0);
   return platforms[index];
 }
 
 export function usePlatformTab(index: number) {
   const selection = useProductSelection();
-  const selected = useSyncExternalStore(selection.subscribe, () => selection.getSnapshot() === index);
+  const selected = useSyncExternalStore(selection.subscribe, () => selection.getSnapshot() === index, () => index === 0);
   return { selected, onSelect: selection.select };
 }

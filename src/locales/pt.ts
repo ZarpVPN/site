@@ -111,7 +111,7 @@ const messages = {
   "visualBypass": "WARP + CONTORNO DPI",
   "visualInternet": "para uma internet aberta",
   "language": "Idioma",
-  "siteTitle": "Zarp - internet sem tantas barreiras",
+  "siteTitle": "Zarp - cliente VPN de código aberto para Cloudflare WARP",
   "siteDescription": "Zarp é um cliente VPN de código aberto com contorno automático de DPI. Cloudflare WARP e seus servidores. Para Windows, Android e macOS.",
   "faqWhatQuestion": "O que é o Zarp e como ele difere de uma VPN comum?",
   "faqWhatAnswer": "O Zarp é um cliente aberto que ajuda a conectar o Cloudflare WARP em redes com bloqueio DPI. Testa estratégias de contorno e salva uma que funciona. Windows e Android também aceitam seus servidores e assinaturas VLESS, Trojan e Hysteria2. O Zarp não vende acesso a uma rede própria de servidores VPN.",

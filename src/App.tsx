@@ -1,6 +1,6 @@
 import { useI18n } from "./i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Icon, Logo } from "./Icons";
 import type { IconName } from "./Icons";
 import { github, platforms } from "./data";
@@ -14,6 +14,15 @@ import { DownloadCard } from "./DownloadCard";
 const copyrightYear = new Date().getFullYear();
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
+const subscribeToDevice = () => () => {};
+const serverDevice = () => "";
+const browserDevice = () => {
+  const agent = navigator.userAgent;
+  if (/Android/i.test(agent)) return "android";
+  if (/Windows/i.test(agent)) return "windows";
+  if (/Macintosh/i.test(agent)) return "macos";
+  return "";
+};
 const nav = [
   { href: "#features", label: "features" },
   { href: "#how-it-works", label: "howItWorks" },
@@ -343,13 +352,7 @@ function Advanced() {
 function Downloads() {
   const { t } = useI18n();
   const { releases, live } = useReleases();
-  const [detected] = useState(() => {
-    const agent = navigator.userAgent;
-    if (/Android/i.test(agent)) return "android";
-    if (/Windows/i.test(agent)) return "windows";
-    if (/Macintosh/i.test(agent)) return "macos";
-    return "";
-  });
+  const detected = useSyncExternalStore(subscribeToDevice, browserDevice, serverDevice);
   return (
     <section className="downloads section-space container" id="download">
       <div className="download-heading">
