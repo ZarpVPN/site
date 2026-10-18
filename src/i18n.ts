@@ -1,23 +1,13 @@
 import { createContext, useContext } from "react";
 import english from "./locales/en";
 import { initializePageLanguage, languageStorageKey, supportedLocales } from "./languagePreferences";
+export { languages } from "./languagePreferences";
 import type { Locale } from "./languagePreferences";
 export type { Locale } from "./languagePreferences";
 
 export type Messages = typeof english;
 export type Selection = { locale: Locale; messages: Messages };
 export type Translate = (key: string, values?: Record<string, string>) => string;
-
-export const languages: { locale: Locale; name: string }[] = [
-  { locale: "en", name: "English" },
-  { locale: "ru", name: "Русский" },
-  { locale: "es", name: "Español" },
-  { locale: "pt", name: "Português" },
-  { locale: "zh", name: "中文" },
-  { locale: "fr", name: "Français" },
-  { locale: "de", name: "Deutsch" },
-  { locale: "fa", name: "فارسی" },
-];
 
 const loaders = {
   ru: () => import("./locales/ru"),

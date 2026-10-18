@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { createServer } from "vite";
 
@@ -9,6 +9,12 @@ if (!stylesheetTag) throw new Error("Vite output is missing the site stylesheet"
 const stylesheet = await readFile(join(dist, stylesheetTag[1].slice(1)), "utf8");
 if (/<\/style/i.test(stylesheet)) throw new Error("Stylesheet cannot be safely inlined");
 const styledTemplate = template.replace(stylesheetTag[0], `<style data-site-styles>${stylesheet}</style>`);
+const assetNames = await readdir(join(dist, "assets"));
+const fontPreload = script => {
+  const name = assetNames.find(asset => asset.startsWith(`manrope-${script}-wght-normal-`) && asset.endsWith(".woff2"));
+  if (!name) throw new Error(`Missing ${script} Manrope font`);
+  return `<link rel="preload" href="/assets/${name}" as="font" type="font/woff2" crossorigin />`;
+};
 const startMarker = "<!-- SEO_START -->";
 const endMarker = "<!-- SEO_END -->";
 const headStart = styledTemplate.indexOf(startMarker);
@@ -41,6 +47,7 @@ try {
       '<link rel="alternate" hreflang="x-default" href="https://zarp.dev/" />',
     ];
     const head = [
+      ...(locale === "ru" ? [fontPreload("cyrillic")] : ["en", "es", "pt", "fr", "de"].includes(locale) ? [fontPreload("latin")] : []),
       `<meta name="description" content="${escapeHtml(seo.description)}" />`,
       `<link rel="canonical" href="${escapeHtml(seo.canonical)}" />`,
       ...alternates,

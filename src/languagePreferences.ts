@@ -2,6 +2,16 @@
 
 export const supportedLocales = ["en", "ru", "es", "pt", "zh", "fr", "de", "fa"] as const;
 export type Locale = (typeof supportedLocales)[number];
+export const languages: { locale: Locale; name: string }[] = [
+  { locale: "en", name: "English" },
+  { locale: "ru", name: "Русский" },
+  { locale: "es", name: "Español" },
+  { locale: "pt", name: "Português" },
+  { locale: "zh", name: "中文" },
+  { locale: "fr", name: "Français" },
+  { locale: "de", name: "Deutsch" },
+  { locale: "fa", name: "فارسی" },
+];
 export const languageStorageKey = "zarp-language";
 export const localePath = (locale: Locale) => locale === "en" ? "/" : `/${locale}/`;
 

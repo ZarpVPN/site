@@ -18,6 +18,8 @@ export const DownloadCard = memo(function DownloadCard({
     <article
       className={`download-card ${recommended ? "recommended" : ""}`}
       id={`download-${p.id}`}
+      data-format={p.format}
+      data-size-unit={t("megabytes")}
     >
       <div className="download-card-top">
         <span className="os-icon">

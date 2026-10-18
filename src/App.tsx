@@ -86,6 +86,8 @@ function Header() {
         <button
           ref={toggle}
           className="menu-toggle"
+          data-open-label={t("openMenu")}
+          data-close-label={t("closeMenu")}
           aria-label={open ? t("closeMenu") : t("openMenu")}
           aria-expanded={open}
           aria-controls="main-nav"
@@ -355,7 +357,7 @@ function Downloads() {
   const { releases, live } = useReleases(section);
   const detected = useSyncExternalStore(subscribeToDevice, browserDevice, serverDevice);
   return (
-    <section className="downloads section-space container" id="download" ref={section}>
+    <section className="downloads section-space container" id="download" ref={section} data-your-device={t("yourDevice")}>
       <div className="download-heading">
         <p className="eyebrow">{t("downloadEyebrow")}</p>
         <h2 className="section-heading">
@@ -375,7 +377,7 @@ function Downloads() {
         ))}
       </div>
       <div className="download-footnote">
-        <span>
+        <span data-live-label={t("releasesLive")}>
           <Icon name="github" />
           {live
             ? t("releasesLive")

@@ -4,6 +4,7 @@ import { useI18n } from "./i18n";
 import { Icon } from "./Icons";
 import { github, platforms } from "./data";
 import { createProductSelection, ProductSelectionContext, usePlatformTab, useSelectedPlatform } from "./productSelection";
+import { screenshotSources, screenshotSrcSet } from "./screenshotSources";
 
 const ProductHeading = memo(function ProductHeading() {
   const { t } = useI18n();
@@ -67,14 +68,18 @@ const ProductWindowTitle = memo(function ProductWindowTitle() {
 const ProductScreenshot = memo(function ProductScreenshot() {
   const { t } = useI18n();
   const platform = useSelectedPlatform();
+  const sources = screenshotSources[platform.id];
+  const originalWidth = platform.id === "macos" ? 2000 : platform.id === "android" ? 1136 : 1252;
   return (
     <div className={`screenshot-area${platform.id === "android" ? " screenshot-android" : ""}`}>
       <img
         key={platform.id}
         src={`${import.meta.env.BASE_URL}assets/${platform.screenshot}`}
+        srcSet={screenshotSrcSet(platform.id, originalWidth)}
+        sizes={sources.sizes}
         alt={t("screenshotAlt", { platform: platform.label })}
         loading="lazy"
-        width={platform.id === "macos" ? 2000 : platform.id === "android" ? 1136 : 1252}
+        width={originalWidth}
         height={platform.id === "macos" ? 827 : platform.id === "android" ? 703 : 768}
       />
     </div>
@@ -125,9 +130,15 @@ const ProductShowcase = memo(function ProductShowcase() {
 });
 
 const Product = memo(function Product() {
+  const { t } = useI18n();
   const [selection] = useState(createProductSelection);
   return (
-    <section className="product section-space container">
+    <section
+      className="product section-space container"
+      data-window-title={t("productFor", { platform: "{platform}" })}
+      data-screenshot-alt={t("screenshotAlt", { platform: "{platform}" })}
+      data-repository-label={t("platformRepository", { platform: "{platform}" })}
+    >
       <ProductSelectionContext value={selection}><ProductShowcase /></ProductSelectionContext>
     </section>
   );
