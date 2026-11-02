@@ -1,4 +1,4 @@
-import { github, platforms } from "./data";
+import { github, downloadPlatforms } from "./data";
 import type { Locale, Messages } from "./i18n";
 import { localePath, supportedLocales } from "./languagePreferences";
 
@@ -28,8 +28,8 @@ export function getSeo(locale: Locale, messages: Messages) {
         description,
         image: `${siteOrigin}/assets/zarp-logo.jpg`,
         applicationCategory: "SecurityApplication",
-        operatingSystem: ["Windows 10/11", "Android 8.0+", "macOS 14+"],
-        downloadUrl: platforms.map(platform => platform.release.url),
+        operatingSystem: ["Windows 10/11", "macOS 14+", "Linux x86_64", "Android 8.0+"],
+        downloadUrl: downloadPlatforms.map(platform => platform.release.url),
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
         sameAs: github,

@@ -1,4 +1,4 @@
-import { github, platforms } from "./data";
+import { github, downloadPlatforms } from "./data";
 import type { PlatformId, Release } from "./data";
 
 type GitHubRelease = {
@@ -13,7 +13,7 @@ export async function fetchLatestReleases(signal: AbortSignal): Promise<{
   id: PlatformId;
   release: Release;
 }[]> {
-  const requests = platforms.map(async (platform) => {
+  const requests = downloadPlatforms.map(async (platform) => {
     const response = await fetch(
       `https://api.github.com/repos/ZarpVPN/${platform.repo}/releases/latest`,
       { signal, headers: { Accept: "application/vnd.github+json" } },
@@ -29,7 +29,9 @@ export async function fetchLatestReleases(signal: AbortSignal): Promise<{
         ? item.name === "Zarp.exe"
         : platform.id === "android"
           ? /^Zarp.*\.apk$/i.test(item.name)
-          : /^Zarp.*arm64\.dmg$/i.test(item.name),
+          : platform.id === "linux"
+            ? /^zarp-ubuntu-amd64\.deb$/i.test(item.name)
+            : /^Zarp.*arm64\.dmg$/i.test(item.name),
     );
     if (
       !asset || !Number.isFinite(asset.size) || asset.size <= 0 ||
@@ -42,8 +44,8 @@ export async function fetchLatestReleases(signal: AbortSignal): Promise<{
       id: platform.id,
       release: {
         version: data.tag_name,
-        size: asset.size,
-        url: asset.browser_download_url,
+        size: platform.id === "linux" ? null : asset.size,
+        url: platform.id === "linux" ? data.html_url : asset.browser_download_url,
         releaseUrl: data.html_url,
       },
     };

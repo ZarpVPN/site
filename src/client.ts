@@ -1,4 +1,5 @@
-import { platforms } from "./data";
+import { downloadPlatforms, platforms } from "./data";
+import { initLinuxPackages, linuxPackageUrl } from "./linuxPackages";
 import type { PlatformId } from "./data";
 import { languages, languageStorageKey, localePath } from "./languagePreferences";
 import { configurePageScrolling } from "./pageScroll";
@@ -180,15 +181,15 @@ function initProduct() {
     });
     title.textContent = localize(section.dataset.windowTitle, platform.label);
     area.classList.toggle("screenshot-android", platform.id === "android");
-    const originalWidth = platform.id === "macos" ? 2000 : platform.id === "android" ? 1136 : 1252;
+    const sources = screenshotSources[platform.id];
     const image = document.createElement("img");
     image.loading = "lazy";
-    image.sizes = screenshotSources[platform.id].sizes;
-    image.srcset = screenshotSrcSet(platform.id, originalWidth);
-    image.src = screenshotUrl(platform.id, originalWidth, originalWidth);
+    image.sizes = sources.sizes;
+    image.srcset = screenshotSrcSet(platform.id, sources.width);
+    image.src = screenshotUrl(platform.id, sources.width, sources.width);
     image.alt = localize(section.dataset.screenshotAlt, platform.label);
-    image.width = originalWidth;
-    image.height = platform.id === "macos" ? 827 : platform.id === "android" ? 703 : 768;
+    image.width = sources.width;
+    image.height = sources.height;
     area.querySelector("img")?.replaceWith(image);
     repository.href = `https://github.com/ZarpVPN/${platform.repo}`;
     const label = repository.firstChild;
@@ -228,8 +229,10 @@ function initFaq() {
 function initDownloads() {
   const section = document.getElementById("download");
   if (!section) return;
+  initLinuxPackages(section);
   const agent = navigator.userAgent;
-  const device: PlatformId | "" = /Android/i.test(agent) ? "android" : /Windows/i.test(agent) ? "windows" : /Macintosh/i.test(agent) ? "macos" : "";
+  const isIOS = /iPhone|iPad|iPod/i.test(agent) || (/Macintosh/i.test(agent) && navigator.maxTouchPoints > 1);
+  const device: PlatformId | "" = /Android/i.test(agent) ? "android" : /Windows/i.test(agent) ? "windows" : isIOS ? "" : /Macintosh/i.test(agent) ? "macos" : /Linux/i.test(agent) ? "linux" : "";
   if (device) {
     const card = document.getElementById(`download-${device}`);
     const heading = card?.querySelector(".os-heading");
@@ -265,11 +268,18 @@ function initDownloads() {
           if (version) version.textContent = release.version;
           if (download) download.href = release.url;
           if (about) about.href = release.releaseUrl;
-          if (meta) meta.textContent = `${card.dataset.format} · ${new Intl.NumberFormat(document.documentElement.lang, {
+          if (id === "linux") {
+            section.querySelectorAll<HTMLAnchorElement>("[data-linux-asset]").forEach(link => {
+              link.href = linuxPackageUrl(release.releaseUrl, link.dataset.linuxAsset!);
+            });
+            const releaseLink = section.querySelector<HTMLAnchorElement>("[data-linux-release]");
+            if (releaseLink) releaseLink.href = release.releaseUrl;
+          }
+          if (meta) meta.textContent = release.size === null ? (card.dataset.format ?? "") : `${card.dataset.format} · ${new Intl.NumberFormat(document.documentElement.lang, {
             minimumFractionDigits: 1, maximumFractionDigits: 1,
           }).format(release.size / 1024 / 1024)} ${card.dataset.sizeUnit}`;
         });
-        if (values.length === platforms.length) {
+        if (values.length === downloadPlatforms.length) {
           const note = section.querySelector<HTMLElement>(".download-footnote > span");
           const label = [...(note?.childNodes ?? [])].find(node => node.nodeType === Node.TEXT_NODE);
           if (label) label.textContent = note?.dataset.liveLabel ?? "";

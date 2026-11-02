@@ -25,4 +25,7 @@ Platform logos from SVG Repo, CC0 license:
 - [Android](https://www.svgrepo.com/svg/475427/android) → android.svg
 - [Apple](https://www.svgrepo.com/svg/303125/apple-logo) → macos.svg
 
+- [Linux](https://github.com/simple-icons/simple-icons/blob/develop/icons/linux.svg) → linux.svg, from Simple Icons ([CC0 license](https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md)).
+- [Router wireless](https://github.com/Templarian/MaterialDesign/blob/master/svg/router-wireless.svg) → router.svg, from Material Design Icons by Pictogrammers, Apache 2.0 license. See LICENSE-MaterialDesign.txt.
+
 All SVGs are displayed as CSS masks so their color follows the site theme.

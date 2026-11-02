@@ -3,13 +3,15 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Icon, Logo } from "./Icons";
 import type { IconName } from "./Icons";
-import { github, platforms } from "./data";
+import { downloadPlatforms, github, upcomingPlatforms } from "./data";
 import { useReleases } from "./useReleases";
 import { useSmoothAnchors } from "./useSmoothAnchors";
 import HeroLayers from "./HeroLayers";
 import Product from "./Product";
 import FAQ from "./FAQ";
-import { DownloadCard } from "./DownloadCard";
+import { DownloadCard, UpcomingDownloadCard } from "./DownloadCard";
+import { LinuxPackageDialog } from "./LinuxPackageDialog";
+import { initLinuxPackages } from "./linuxPackages";
 
 const copyrightYear = new Date().getFullYear();
 
@@ -20,7 +22,9 @@ const browserDevice = () => {
   const agent = navigator.userAgent;
   if (/Android/i.test(agent)) return "android";
   if (/Windows/i.test(agent)) return "windows";
+  if (/iPhone|iPad|iPod/i.test(agent) || (/Macintosh/i.test(agent) && navigator.maxTouchPoints > 1)) return "";
   if (/Macintosh/i.test(agent)) return "macos";
+  if (/Linux/i.test(agent)) return "linux";
   return "";
 };
 const nav = [
@@ -121,7 +125,7 @@ function Hero() {
             <Icon name="github" /> {t("openSource")} </a>
         </div>
         <div className="hero-platforms">
-          {platforms.map((p) => (
+          {downloadPlatforms.map((p) => (
             <a href={`#download-${p.id}`} key={p.id}>
               <Icon name={p.id} />
               <span>{p.label}</span>
@@ -237,7 +241,7 @@ function Features() {
       </div>
       <div className="facts-row">
         <span>
-          <b>3</b> {t("platforms")} </span>
+          <b>{downloadPlatforms.length}</b> {t("platforms")} </span>
         <span>
           <b>8</b> {t("interfaceLanguages")} </span>
         <span>
@@ -355,6 +359,9 @@ function Downloads() {
   const { t } = useI18n();
   const section = useRef<HTMLElement>(null);
   const { releases, live } = useReleases(section);
+  useEffect(() => {
+    if (section.current) return initLinuxPackages(section.current);
+  }, []);
   const detected = useSyncExternalStore(subscribeToDevice, browserDevice, serverDevice);
   return (
     <section className="downloads section-space container" id="download" ref={section} data-your-device={t("yourDevice")}>
@@ -367,7 +374,7 @@ function Downloads() {
         <p>{t("downloadDescription")}</p>
       </div>
       <div className="download-grid">
-        {platforms.map(p => (
+        {downloadPlatforms.map(p => (
           <DownloadCard
             key={p.id}
             platform={p}
@@ -375,7 +382,9 @@ function Downloads() {
             recommended={detected === p.id}
           />
         ))}
+        {upcomingPlatforms.map(p => <UpcomingDownloadCard key={p.id} platform={p} />)}
       </div>
+      <LinuxPackageDialog release={releases.linux} />
       <div className="download-footnote">
         <span data-live-label={t("releasesLive")}>
           <Icon name="github" />
@@ -406,7 +415,7 @@ function Footer() {
           <div className="footer-links">
             <div>
               <span>{t("apps")}</span>
-              {platforms.map((p) => (
+              {downloadPlatforms.map((p) => (
                 <a key={p.id} href={`#download-${p.id}`}>
                   {p.label}
                 </a>

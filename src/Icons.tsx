@@ -8,6 +8,8 @@ export type IconName =
   | "windows"
   | "android"
   | "macos"
+  | "linux"
+  | "router"
   | "shield"
   | "refresh"
   | "bolt"

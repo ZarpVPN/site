@@ -69,18 +69,17 @@ const ProductScreenshot = memo(function ProductScreenshot() {
   const { t } = useI18n();
   const platform = useSelectedPlatform();
   const sources = screenshotSources[platform.id];
-  const originalWidth = platform.id === "macos" ? 2000 : platform.id === "android" ? 1136 : 1252;
   return (
     <div className={`screenshot-area${platform.id === "android" ? " screenshot-android" : ""}`}>
       <img
         key={platform.id}
         src={`${import.meta.env.BASE_URL}assets/${platform.screenshot}`}
-        srcSet={screenshotSrcSet(platform.id, originalWidth)}
+        srcSet={screenshotSrcSet(platform.id, sources.width)}
         sizes={sources.sizes}
         alt={t("screenshotAlt", { platform: platform.label })}
         loading="lazy"
-        width={originalWidth}
-        height={platform.id === "macos" ? 827 : platform.id === "android" ? 703 : 768}
+        width={sources.width}
+        height={sources.height}
       />
     </div>
   );

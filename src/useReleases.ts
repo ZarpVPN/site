@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import type { RefObject } from "react";
-import { platforms } from "./data";
+import { downloadPlatforms } from "./data";
 import type { PlatformId, Release } from "./data";
 
 const fallback = Object.fromEntries(
-  platforms.map(platform => [platform.id, platform.release]),
+  downloadPlatforms.map(platform => [platform.id, platform.release]),
 ) as Record<PlatformId, Release>;
 
 export function useReleases(section: RefObject<HTMLElement | null>) {
@@ -44,7 +44,7 @@ export function useReleases(section: RefObject<HTMLElement | null>) {
             }
             return next;
           });
-          setLive(values.length === platforms.length);
+          setLive(values.length === downloadPlatforms.length);
         })
         .catch(() => { /* Built-in release links remain available. */ })
         .finally(() => clearTimeout(timeout));
