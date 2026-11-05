@@ -1,5 +1,5 @@
 import { downloadPlatforms, platforms } from "./data";
-import { initLinuxPackages, linuxPackageUrl } from "./linuxPackages";
+import { initLinuxPackages } from "./linuxPackages";
 import type { PlatformId } from "./data";
 import { languages, languageStorageKey, localePath } from "./languagePreferences";
 import { configurePageScrolling } from "./pageScroll";
@@ -269,9 +269,6 @@ function initDownloads() {
           if (download) download.href = release.url;
           if (about) about.href = release.releaseUrl;
           if (id === "linux") {
-            section.querySelectorAll<HTMLAnchorElement>("[data-linux-asset]").forEach(link => {
-              link.href = linuxPackageUrl(release.releaseUrl, link.dataset.linuxAsset!);
-            });
             const releaseLink = section.querySelector<HTMLAnchorElement>("[data-linux-release]");
             if (releaseLink) releaseLink.href = release.releaseUrl;
           }

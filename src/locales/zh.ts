@@ -135,7 +135,7 @@ const messages = {
   "faqDataAnswer": "根据文档，Zarp 没有遥测，也不收集个人数据。设置和测试结果保存在设备上。使用 WARP 时，Cloudflare 按其隐私政策处理流量；使用自有服务器时，由服务器运营者处理。这不代表完全匿名的承诺。",
   "cloudflarePrivacy": "Cloudflare 隐私政策",
   "faqWarningsQuestion": "为什么 Windows 或 macOS 启动时会警告？",
-  "faqWarningsAnswer": "Windows v1.5.0 未签名，因此 SmartScreen 可能警告。macOS v0.2.0 未经 Apple 公证：首次启动可在“系统设置 → 隐私与安全性 → 仍要打开”中允许。校验和及详情见各版本发布页面。",
+  "faqWarningsAnswer": "Windows v1.8.3 未签名，因此 SmartScreen 可能警告。macOS v1.0.0 未经 Apple 公证：首次启动可在“系统设置 → 隐私与安全性 → 仍要打开”中允许。校验和及详情见各版本发布页面。",
   "macosGuide": "macOS 指南",
   "faqCountryQuestion": "可以选择国家或指定应用吗？",
   "faqCountryAnswer": "WARP 不支持任意选择出口国家。俄罗斯、伊朗和中国筛选器选择的是待测试策略，并非 IP 所在国家。Windows 在使用自有服务器时提供路由和应用选择；Android 支持应用选择和可编辑规则。macOS 暂无这些功能。",

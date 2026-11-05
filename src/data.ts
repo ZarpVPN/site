@@ -6,6 +6,8 @@ export type Release = {
   releaseUrl: string;
 };
 export const github = "https://github.com/ZarpVPN";
+// Fallback links must reach the latest release without a browser API request.
+// Versioned APK/DMG filenames require the release page until the API resolves them.
 export type DownloadPlatform = {
   id: PlatformId;
   label: string;
@@ -28,10 +30,10 @@ export const platforms: (DownloadPlatform & {
       "windowsDescription",
     screenshot: "windows-app.webp",
     release: {
-      version: "v1.5.0",
-      size: 32550400,
-      url: `${github}/Zarp/releases/download/v1.5.0/Zarp.exe`,
-      releaseUrl: `${github}/Zarp/releases/tag/v1.5.0`,
+      version: "v1.8.3",
+      size: 32648192,
+      url: `${github}/Zarp/releases/latest/download/Zarp.exe`,
+      releaseUrl: `${github}/Zarp/releases/latest`,
     },
   },
   {
@@ -44,10 +46,10 @@ export const platforms: (DownloadPlatform & {
       "macosDescription",
     screenshot: "macos-app.webp",
     release: {
-      version: "v0.2.0",
-      size: 11128210,
-      url: `${github}/Zarp-MacOS/releases/download/v0.2.0/Zarp-0.2.0-arm64.dmg`,
-      releaseUrl: `${github}/Zarp-MacOS/releases/tag/v0.2.0`,
+      version: "v1.0.0",
+      size: 51869816,
+      url: `${github}/Zarp-MacOS/releases/latest`,
+      releaseUrl: `${github}/Zarp-MacOS/releases/latest`,
     },
   },
   {
@@ -61,8 +63,8 @@ export const platforms: (DownloadPlatform & {
     release: {
       version: "v0.3.5",
       size: null,
-      url: `${github}/Zarp-Linux/releases/tag/v0.3.5`,
-      releaseUrl: `${github}/Zarp-Linux/releases/tag/v0.3.5`,
+      url: `${github}/Zarp-Linux/releases/latest`,
+      releaseUrl: `${github}/Zarp-Linux/releases/latest`,
     },
   },
   {
@@ -74,10 +76,10 @@ export const platforms: (DownloadPlatform & {
     description: "androidDescription",
     screenshot: "android-app.webp",
     release: {
-      version: "v1.1.1",
-      size: 52102257,
-      url: `${github}/Zarp-Android/releases/download/v1.1.1/Zarp-v1.1.1.apk`,
-      releaseUrl: `${github}/Zarp-Android/releases/tag/v1.1.1`,
+      version: "v1.3.0",
+      size: 52194398,
+      url: `${github}/Zarp-Android/releases/latest`,
+      releaseUrl: `${github}/Zarp-Android/releases/latest`,
     },
   },
 ];

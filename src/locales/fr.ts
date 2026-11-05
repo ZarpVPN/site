@@ -135,7 +135,7 @@ const messages = {
   "faqDataAnswer": "Selon sa documentation, Zarp ne collecte ni télémétrie ni données personnelles. Réglages et résultats restent sur votre appareil. Avec WARP, Cloudflare traite le trafic selon sa politique de confidentialité ; avec votre serveur, son opérateur le traite. Cela ne garantit pas un anonymat complet.",
   "cloudflarePrivacy": "Politique de confidentialité de Cloudflare",
   "faqWarningsQuestion": "Pourquoi Windows ou macOS affichent-ils un avertissement au lancement ?",
-  "faqWarningsAnswer": "La version Windows v1.5.0 n’est pas signée, SmartScreen peut donc avertir. La version macOS v0.2.0 n’est pas notariée par Apple : autorisez le premier lancement dans Réglages Système → Confidentialité et sécurité → Ouvrir quand même. Les sommes de contrôle et détails figurent sur chaque page de version.",
+  "faqWarningsAnswer": "La version Windows v1.8.3 n’est pas signée, SmartScreen peut donc avertir. La version macOS v1.0.0 n’est pas notariée par Apple : autorisez le premier lancement dans Réglages Système → Confidentialité et sécurité → Ouvrir quand même. Les sommes de contrôle et détails figurent sur chaque page de version.",
   "macosGuide": "Guide macOS",
   "faqCountryQuestion": "Peut-on choisir un pays ou certaines applications ?",
   "faqCountryAnswer": "WARP ne permet pas de choisir librement le pays de sortie. Les filtres Russie, Iran et Chine sélectionnent les stratégies à tester, pas le pays de votre IP. Windows propose le routage et le choix d’applications avec votre serveur ; Android permet le choix d’applications et des règles modifiables. macOS n’a pas encore ces fonctions.",

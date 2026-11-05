@@ -1,3 +1,5 @@
+import { github } from "./data";
+
 export const linuxPackages = [
   { name: "Ubuntu", requirement: "26.04 · x86_64", format: "DEB", file: "zarp-ubuntu-amd64.deb" },
   { name: "Debian", requirement: "13 · x86_64", format: "DEB", file: "zarp-debian-amd64.deb" },
@@ -5,8 +7,8 @@ export const linuxPackages = [
   { name: "Arch Linux", requirement: "x86_64 · systemd", format: "PKG.TAR.ZST", file: "zarp-arch-x86_64.pkg.tar.zst" },
 ] as const;
 
-export const linuxPackageUrl = (releaseUrl: string, file: string) =>
-  `${releaseUrl.replace("/releases/tag/", "/releases/download/")}/${file}`;
+export const linuxPackageUrl = (file: string) =>
+  `${github}/Zarp-Linux/releases/latest/download/${file}`;
 
 export function initLinuxPackages(section: HTMLElement) {
   const trigger = section.querySelector<HTMLAnchorElement>('[aria-controls="linux-packages"]');

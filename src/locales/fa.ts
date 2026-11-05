@@ -135,7 +135,7 @@ const messages = {
   "faqDataAnswer": "طبق مستندات، Zarp تله‌متری ندارد و داده شخصی جمع‌آوری نمی‌کند. تنظیمات و نتایج بررسی روی دستگاه می‌مانند. با WARP، Cloudflare ترافیک را طبق سیاست حریم خصوصی خود پردازش می‌کند؛ با سرور شخصی، اپراتور آن مسئول است. این وعده ناشناس‌ماندن کامل نیست.",
   "cloudflarePrivacy": "سیاست حریم خصوصی Cloudflare",
   "faqWarningsQuestion": "چرا Windows یا macOS هنگام اجرا هشدار می‌دهند؟",
-  "faqWarningsAnswer": "نسخه Windows v1.5.0 امضا نشده است، پس SmartScreen ممکن است هشدار دهد. نسخه macOS v0.2.0 توسط Apple تأیید نشده است: اولین اجرا را در System Settings → Privacy & Security → Open Anyway مجاز کنید. جمع‌های کنترلی و جزئیات در صفحه هر نسخه هستند.",
+  "faqWarningsAnswer": "نسخه Windows v1.8.3 امضا نشده است، پس SmartScreen ممکن است هشدار دهد. نسخه macOS v1.0.0 توسط Apple تأیید نشده است: اولین اجرا را در System Settings → Privacy & Security → Open Anyway مجاز کنید. جمع‌های کنترلی و جزئیات در صفحه هر نسخه هستند.",
   "macosGuide": "راهنمای macOS",
   "faqCountryQuestion": "می‌توانم کشور یا برنامه‌های خاص را انتخاب کنم؟",
   "faqCountryAnswer": "WARP انتخاب دلخواه کشور خروجی را ارائه نمی‌دهد. فیلترهای روسیه، ایران و چین، راهبردهای آزمایش را انتخاب می‌کنند، نه کشور IP شما. در Windows با سرور شخصی مسیریابی و انتخاب برنامه‌ها در دسترس است؛ Android انتخاب برنامه و قوانین قابل ویرایش دارد. macOS هنوز این قابلیت‌ها را ندارد.",

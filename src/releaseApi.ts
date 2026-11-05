@@ -45,7 +45,9 @@ export async function fetchLatestReleases(signal: AbortSignal): Promise<{
       release: {
         version: data.tag_name,
         size: platform.id === "linux" ? null : asset.size,
-        url: platform.id === "linux" ? data.html_url : asset.browser_download_url,
+        url: platform.id === "windows"
+          ? platform.release.url
+          : platform.id === "linux" ? data.html_url : asset.browser_download_url,
         releaseUrl: data.html_url,
       },
     };

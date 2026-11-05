@@ -18,7 +18,7 @@ export function LinuxPackageDialog({ release }: { release: Release }) {
       </div>
       <div className="linux-package-list">
         {linuxPackages.map(pkg => (
-          <a key={pkg.file} className="linux-package-option" href={linuxPackageUrl(release.releaseUrl, pkg.file)} data-linux-asset={pkg.file}>
+          <a key={pkg.file} className="linux-package-option" href={linuxPackageUrl(pkg.file)}>
             <span className="linux-package-system"><strong>{pkg.name}</strong><span>{pkg.requirement}</span></span>
             <span className="linux-package-format"><bdi>{pkg.format}</bdi><Icon name="download" /></span>
           </a>
